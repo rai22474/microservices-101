@@ -18,41 +18,41 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration("classpath:cucumber.xml")
 public class GivenABunchACustomersScenario {
 
-	@Given("^an bunch of customers with identity cards \"(.*?)\"$")
-	public void an_bunch_of_customers_with_identity_cards(String identityCards) {
-		String[] identityCardsAsArrays = identityCards.split(",");
+    @Given("^an bunch of customers with identity cards \"(.*?)\"$")
+    public void an_bunch_of_customers_with_identity_cards(String identityCards) {
+        String[] identityCardsAsArrays = identityCards.split(",");
 
-		Map<String, String> customerIdentifiers = new HashMap<>();
+        Map<String, String> customerIdentifiers = new HashMap<>();
 
-		for (String identityCard : identityCardsAsArrays) {
-			Response response = requestSender.post("io/ari/subjects", customersFactory.createCustomer(identityCard));
-			assertEquals("The response status must be created", 201, response.getStatus());
+        for (String identityCard : identityCardsAsArrays) {
+            Response response = requestSender.post("customers", customersFactory.createCustomer(identityCard));
+            assertEquals("The response status must be created", 201, response.getStatus());
 
-			Map<String, Object> customerCreationResponse = response.readEntity(new GenericType<Map<String, Object>>() {
-			});
-			String customerId = (String) customerCreationResponse.get("entityId");
-			customerIdentifiers.put(identityCard, customerId);
+            Map<String, Object> customerCreationResponse = response.readEntity(new GenericType<Map<String, Object>>() {
+            });
+            String customerId = (String) customerCreationResponse.get("entityId");
+            customerIdentifiers.put(identityCard, customerId);
 
-			deleteCustomerHook.registerCustomers(customerId);
-		}
+            customersRegistry.registerCustomer(customerId,identityCard);
+        }
 
-		cucumberContext.publishValue("customerIdentifiers", customerIdentifiers);
-	}
+        cucumberContext.publishValue("customerIdentifiers", customerIdentifiers);
+    }
 
-	@After(value = "@deleteCustomer", order = 10)
-	public void deleteRegisterClients() {
-		deleteCustomerHook.getCustomersIdsAsArrays().forEach(deleteCustomerHook::deleteCustomers);
-	}
+    @After(value = "@deleteCustomer", order = 10)
+    public void deleteRegisterClients() {
+        customersRegistry.deleteRegisterCustomers();
+    }
 
-	@Autowired
-	private RestClient requestSender;
+    @Autowired
+    private RestClient requestSender;
 
-	@Autowired
-	private CustomersFactory customersFactory;
+    @Autowired
+    private CustomersFactory customersFactory;
 
-	@Autowired
-	private DeleteCustomersHook deleteCustomerHook;
+    @Autowired
+    private CustomersRegistry customersRegistry;
 
-	@Autowired
-	private CucumberContext cucumberContext;
+    @Autowired
+    private CucumberContext cucumberContext;
 }

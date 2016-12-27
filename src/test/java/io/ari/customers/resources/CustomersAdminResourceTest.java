@@ -1,6 +1,7 @@
-package io.ari.subjects.resources;
+package io.ari.customers.resources;
 
 import com.google.common.collect.ImmutableMap;
+import io.ari.customers.resources.CustomersAdminResource;
 import io.ari.repositories.write.EntityRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,35 +19,35 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SubjectsResourceTest {
+public class CustomersAdminResourceTest {
 
 	@Test
 	public void shouldReturnTheCreatedResponse() {
-		ResponseEntity response = subjectsResource.createSubject(createClientData());
+		ResponseEntity response = customersResource.createCustomer(createClientData());
 
 		assertEquals("The response code should be CREATED", 201, response.getStatusCodeValue());
-		verify(subjectsRepository).saveEntity(createClientData());
+		verify(customersRepository).saveEntity(createClientData());
 	}
 	
 	@Test
 	public void shouldReturnTheEntityResponse() {
-		Map<String, Object> subjectData = createClientData();
-		when(subjectsRepository.saveEntity(subjectData)).thenReturn(ImmutableMap.of("id",SUBJECT_ID));
+		Map<String, Object> customerData = createClientData();
+		when(customersRepository.saveEntity(customerData)).thenReturn(ImmutableMap.of("id",CUSTOMER_ID));
 
-		ResponseEntity response = subjectsResource.createSubject(subjectData);
+		ResponseEntity response = customersResource.createCustomer(customerData);
 
 		Map<String,Object> entity = (Map<String,Object>)response.getBody();
 
 		assertNotNull("The response entity must not null",entity);
-		assertEquals("The id must be expected", SUBJECT_ID, entity.get("entityId"));
-		verify(subjectsRepository).saveEntity(subjectData);
+		assertEquals("The id must be expected", CUSTOMER_ID, entity.get("entityId"));
+		verify(customersRepository).saveEntity(customerData);
 	}
 	
 	@Test
-	public void shouldDeleteSubjectCollection(){
-		ResponseEntity response = subjectsResource.deleteSubjects();
+	public void shouldDeleteCustomerCollection(){
+		ResponseEntity response = customersResource.deleteCustomers();
 		assertEquals("The response code should be NO CONTENT", 204, response.getStatusCodeValue());
-		verify(subjectsRepository).deleteAll();
+		verify(customersRepository).deleteAll();
 	}
 	
 	private Map<String, Object> createClientData() {
@@ -69,10 +70,10 @@ public class SubjectsResourceTest {
 	}
 
 	@Mock
-	private EntityRepository subjectsRepository;
+	private EntityRepository customersRepository;
 
 	@InjectMocks
-	private SubjectsResource subjectsResource;
+	private CustomersAdminResource customersResource;
 
-	private static String SUBJECT_ID = "12345678";
+	private static String CUSTOMER_ID = "12345678";
 }

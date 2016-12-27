@@ -1,4 +1,4 @@
-package io.ari.subjects.resources;
+package io.ari.customers.resources;
 
 import io.ari.repositories.write.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("io/ari/subjects")
-public class SubjectsResource {
+@RequestMapping("customers")
+public class CustomersAdminResource {
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity createSubject(@RequestBody Map<String, Object> subjectData) {
-		System.out.println(subjectData);
-		return createClient(subjectData);
-	}
-
-	@RequestMapping(method = RequestMethod.DELETE)
-	public ResponseEntity deleteSubjects() {
-		subjectsRepository.deleteAll();
-		return ResponseEntity.noContent().build();
-	}
-
-	private ResponseEntity<Map<String,Object>> createClient(Map<String, Object> subjectData) {
-		Map<String,Object> savedEntity = subjectsRepository.saveEntity(subjectData);
+	public ResponseEntity createCustomer(@RequestBody Map<String, Object> customerData) {
+		Map<String,Object> savedEntity = customersRepository.saveEntity(customerData);
 
 		Map<String, Object> entity = new HashMap<>();
 		entity.put(ENTITY_ID, savedEntity.get("id"));
@@ -41,9 +30,15 @@ public class SubjectsResource {
 				.body(entity);
 	}
 
+	@RequestMapping(method = RequestMethod.DELETE)
+	public ResponseEntity deleteCustomers() {
+		customersRepository.deleteAll();
+		return ResponseEntity.noContent().build();
+	}
+
 	private static final String ENTITY_ID = "entityId";
 
 	@Autowired
-	@Qualifier("subjectsRepository")
-	private EntityRepository subjectsRepository;
+	@Qualifier("customersRepository")
+	private EntityRepository customersRepository;
 }

@@ -16,9 +16,11 @@ public class EntityRepository extends WriteRepository {
         entityData.put("id",sequential.toString());
         entities.put(sequential.toString(), entityData);
 
-        System.out.println(entityData);
-
         return entityData;
+    }
+
+    public void delete(String entityId) {
+        entities.remove(entityId);
     }
 
     public Map<String, Object> update(String entityId, Map<String, Object> entityData) {

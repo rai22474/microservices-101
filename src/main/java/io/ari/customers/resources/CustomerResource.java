@@ -29,7 +29,6 @@ public class CustomerResource {
 	private ResponseEntity findCustomerById(String customerId) {
 		try {
 			Map<String, Object> customer = customersRepository.findOne(customerId);
-			System.out.println(customer);
 			return ResponseEntity.ok(customersAssembler.convertEntityToDto(customer));
 		} catch (EntityNotFound e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -37,7 +36,7 @@ public class CustomerResource {
 	}
 
 	@Autowired
-	@Qualifier("subjectsRepository")
+	@Qualifier("customersRepository")
 	private EntityRepository customersRepository;
 
 	@Autowired

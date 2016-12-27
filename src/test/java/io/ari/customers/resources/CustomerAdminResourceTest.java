@@ -1,4 +1,4 @@
-package io.ari.subjects.resources;
+package io.ari.customers.resources;
 
 import io.ari.repositories.write.EntityRepository;
 import org.junit.Test;
@@ -8,26 +8,25 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
 
-
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SubjectResourceTest {
+public class CustomerAdminResourceTest {
 
-	private static final String SUBJECT_ID = "ES0182000003082";
+	private static final String CUSTOMER_ID = "ES0182000003082";
 
 	@InjectMocks
-	private SubjectResource subjectsResource;
+	private CustomerAdminResource customersResource;
 	
 	@Mock
-	private EntityRepository subjectsRepository;
+	private EntityRepository customersRepository;
 	
 	@Test
 	public void shouldDeleteAnExistingUserResponse(){
-		ResponseEntity response = subjectsResource.deleteClient(SUBJECT_ID);
+		ResponseEntity response = customersResource.deleteClient(CUSTOMER_ID);
 		assertEquals("The response code should be NO CONTENT", 204, response.getStatusCodeValue());
 		
-		verify(subjectsRepository).delete(SUBJECT_ID);
+		verify(customersRepository).delete(CUSTOMER_ID);
 	}
 }
