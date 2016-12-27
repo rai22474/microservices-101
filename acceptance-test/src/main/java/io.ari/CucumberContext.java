@@ -1,4 +1,4 @@
-package io.kuwagata;
+package io.ari;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package stepdefinitions.response;
 
-import io.kuwagata.CucumberContext;
+import io.ari.CucumberContext;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

@@ -1,4 +1,4 @@
-package io.kuwagata;
+package io.ari;
 
 import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Component;

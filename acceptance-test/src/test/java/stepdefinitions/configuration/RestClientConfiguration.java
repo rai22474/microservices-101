@@ -1,6 +1,6 @@
 package stepdefinitions.configuration;
 
-import io.kuwagata.RestClient;
+import io.ari.RestClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

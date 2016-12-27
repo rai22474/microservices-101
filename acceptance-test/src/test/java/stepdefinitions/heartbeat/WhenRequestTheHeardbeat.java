@@ -1,7 +1,7 @@
 package stepdefinitions.heartbeat;
 
 import cucumber.api.java.en.When;
-import io.kuwagata.*;
+import io.ari.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
