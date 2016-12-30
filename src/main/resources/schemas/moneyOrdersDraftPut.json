@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "moneyOrdersDraftPost",
+  "type": "object",
+  "properties": {
+    "moneyOrders": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "amount",
+          "mobilePhone",
+          "name"
+        ],
+        "properties": {
+          "amount": {
+            "type": "object",
+            "required": [
+              "currency",
+              "value"
+            ],
+            "properties": {
+              "currency": {
+                "type": "string"
+              },
+              "value": {
+                "type": "number",
+                "description": "amount to be sent"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "name of the recipient user"
+          },
+          "email": {
+            "type": "string",
+            "description": "email of the recipient user"
+          },
+          "mobilePhone": {
+            "type": "string",
+            "description": "mobilePhone of the recipient user"
+          }
+        }
+      }
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

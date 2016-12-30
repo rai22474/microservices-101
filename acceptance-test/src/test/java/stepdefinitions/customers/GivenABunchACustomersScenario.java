@@ -4,6 +4,7 @@ import io.ari.CucumberContext;
 import io.ari.RestClient;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
+import jersey.repackaged.com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,23 +26,17 @@ public class GivenABunchACustomersScenario {
         Map<String, String> customerIdentifiers = new HashMap<>();
 
         for (String identityCard : identityCardsAsArrays) {
-            Response response = requestSender.post("customers", customersFactory.createCustomer(identityCard));
+
+            Map<String,Object> customerData = customersFactory.createCustomer(identityCard);
+            Response response = requestSender.post("customers",customerData,ImmutableMap.of("x-customer-id", customerData.get("id")));
+
             assertEquals("The response status must be created", 201, response.getStatus());
 
-            Map<String, Object> customerCreationResponse = response.readEntity(new GenericType<Map<String, Object>>() {
-            });
-            String customerId = (String) customerCreationResponse.get("entityId");
-            customerIdentifiers.put(identityCard, customerId);
-
-            customersRegistry.registerCustomer(customerId,identityCard);
+            customerIdentifiers.put(identityCard, (String)customerData.get("id"));
+            customersRegistry.registerCustomer((String)customerData.get("id"),identityCard);
         }
 
         cucumberContext.publishValue("customerIdentifiers", customerIdentifiers);
-    }
-
-    @After(value = "@deleteCustomer", order = 10)
-    public void deleteRegisterClients() {
-        customersRegistry.deleteRegisterCustomers();
     }
 
     @Autowired

@@ -1,21 +1,15 @@
-package io.ari.repositories.write;
+package io.ari.repositories.entities;
 
 import io.ari.repositories.exceptions.EntityNotFound;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
-public class EntityRepository extends WriteRepository {
+public class Repository {
 
-    public EntityRepository(String collectionName) {
-        super(collectionName);
-    }
-
-    public Map<String, Object> saveEntity(Map<String, Object> entityData) {
-        sequential++;
-        entityData.put("id",sequential.toString());
-        entities.put(sequential.toString(), entityData);
-
+    public Map<String, Object> saveEntity(String id,Map<String, Object> entityData) {
+        entities.put(id, entityData);
         return entityData;
     }
 
@@ -35,7 +29,13 @@ public class EntityRepository extends WriteRepository {
         return entities.get(entityId);
     }
 
-    private Integer sequential = 0;
+    public Optional<Map<String,Object>> findByKey(Map<String, Object> entityKey) {
+        return Optional.empty();
+    }
+
+    public void deleteAll() {
+        entities.clear();
+    }
 
     private Map<String, Map<String, Object>> entities = new HashMap<>();
 }

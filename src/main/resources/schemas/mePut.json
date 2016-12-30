@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "customerPost",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "addressType": {
+          "type": "string"
+        },
+        "streetAddress": {
+          "type": "string"
+        },
+        "streetNumber": {
+          "type": "string"
+        },
+        "houseNumber": {
+          "type": "string"
+        },
+        "houseStair": {
+          "type": "string"
+        },
+        "houseLetter": {
+          "type": "string"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "town": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "geolocation": {
+          "type": "object",
+          "properties": {
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "latitude",
+            "longitude"
+          ]
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": ["name"]
+    },
+    {
+      "required": ["lastName"]
+    },
+    {
+      "required": ["email"]
+    }
+  ]
+}

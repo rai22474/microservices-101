@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "withdrawalsPost",
+  "type": "object",
+  "required": [
+    "amount",
+    "name",
+    "accountNumber"
+  ],
+  "properties": {
+    "amount": {
+      "type": "object",
+      "required": [
+        "currency",
+        "value"
+      ],
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number",
+          "description": "amount to be request"
+        }
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "name of the recipient user"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "account number of the recipient user"
+    },
+    "mobilePhone": {
+      "type": "string",
+      "description": "mobilePhone of the recipient user"
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

@@ -3,62 +3,93 @@ package io.ari.customers.resources.assemblers;
 import com.google.common.collect.ImmutableSet;
 import io.ari.assemblers.Assembler;
 import io.ari.assemblers.HypermediaAssembler;
+import io.ari.customers.domain.Customer;
+import io.ari.customers.domain.exceptions.CustomerExists;
+import io.ari.customers.domain.factories.CustomersFactory;
+
+import io.ari.customers.resources.assemblers.exceptions.InvalidIdCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Set;
 
+import static com.google.common.collect.ImmutableMap.of;
 import static java.util.stream.Collectors.toMap;
 
 @Component
 public class CustomersAssembler extends Assembler {
 
-	@Override
-	public Map<String, Object> convertEntityToDto(Map<String, Object> customerData, Object... additionalData) {
-		Map<String, Object> customerDto = customerData
-				.entrySet()
-				.stream()
-				.filter(entry -> !blacklistedKeys.contains(entry.getKey()))
-				.collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+    public Customer convertDtoToEntity(String customerId, Map<String, Object> customerData) throws CustomerExists, InvalidIdCard {
+        String idCard = (String) customerData.get("idCard");
+        if (!idCardValidator.isValid(idCard)){
+            throw new InvalidIdCard();
+        }
 
-		customerDto.put("_links", getCustomerHypermedia());
+        Customer customer = customersFactory.createCustomer(customerId,
+                idCard,
+                (String) customerData.get("name"),
+                (String) customerData.get("lastName"),
+                (String) customerData.get("mobilePhone"));
 
-		return customerDto;
-	}
+        customer.setEmail((String) customerData.get("email"));
+        customer.setAvatar((String) customerData.get("avatar"));
 
-	@Override
-	protected String getCollectionSelfLink() {
-		return "api/customers";
-	}
+        return customer;
+    }
 
-	private Map<String, Object> getCustomerHypermedia() {
-		Map<String, Object> hypermedia = hypermediaAssembler.createHypermedia("api/me", "wizzo-read");
+    public Map<String, Object> convertEntityToDto() {
+        return of("_links", hypermediaAssembler.createHypermedia("api/me", "wizzo-read"));
+    }
 
-		hypermedia.put("bucks", hypermediaAssembler.createLink("api/bucks", "GET", "wizzo-read"));
-		hypermedia.put("movements", hypermediaAssembler.createLink("api/movements", "GET", "wizzo-read"));
-		hypermedia.put("settings", hypermediaAssembler.createLink("api/settings", "GET", "wizzo-read"));
-		hypermedia.put("editSettings", hypermediaAssembler.createLink("api/settings", "PUT", "wizzo-write"));
-		hypermedia.put("editMe", hypermediaAssembler.createLink("api/me", "PUT", "wizzo-write"));
+    @Override
+    public Map<String, Object> convertEntityToDto(Map<String, Object> customerData, Object... additionalData) {
+        Map<String, Object> customerDto = customerData
+                .entrySet()
+                .stream()
+                .collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 
-		hypermedia.put("createMoneyOrder", hypermediaAssembler.createLink("api/moneyOrders", "POST", "wizzo-write"));
-		hypermedia.put("createMoneyOrderDraft", hypermediaAssembler.createLink("api/drafts/moneyOrders", "POST", "wizzo-write"));
+        customerDto.put("_links", getCustomerHypermedia());
 
-		hypermedia.put("createMoneyRequest", hypermediaAssembler.createLink("api/moneyRequests", "POST", "wizzo-write"));
-		hypermedia.put("createMoneyRequestDraft", hypermediaAssembler.createLink("api/drafts/moneyRequests", "POST", "wizzo-write"));
+        return customerDto;
+    }
 
-		hypermedia.put("recharge", hypermediaAssembler.createLink("api/recharges", "POST", "wizzo-recharges"));
-		hypermedia.put("rechargeCards", hypermediaAssembler.createLink("api/cards", "GET", "wizzo-recharges"));
+    @Override
+    protected String getCollectionSelfLink() {
+        return "api/customers";
+    }
 
-		hypermedia.put("wallet", hypermediaAssembler.createLink("api/cards", "GET", "wizzo-read"));
-		hypermedia.put("createCard", hypermediaAssembler.createLink("api/cards", "POST", "wizzo-write"));
+    private Map<String, Object> getCustomerHypermedia() {
+        Map<String, Object> hypermedia = hypermediaAssembler.createHypermedia("api/me", "wizzo-read");
 
-		return hypermedia;
-	}
+        hypermedia.put("bucks", hypermediaAssembler.createLink("api/bucks", "GET", "wizzo-read"));
+        hypermedia.put("movements", hypermediaAssembler.createLink("api/movements", "GET", "wizzo-read"));
+        hypermedia.put("settings", hypermediaAssembler.createLink("api/settings", "GET", "wizzo-read"));
+        hypermedia.put("editSettings", hypermediaAssembler.createLink("api/settings", "PUT", "wizzo-write"));
+        hypermedia.put("editMe", hypermediaAssembler.createLink("api/me", "PUT", "wizzo-write"));
 
-	@Autowired
-	private HypermediaAssembler hypermediaAssembler;
+        hypermedia.put("createMoneyOrder", hypermediaAssembler.createLink("api/moneyOrders", "POST", "wizzo-write"));
+        hypermedia.put("createMoneyOrderDraft", hypermediaAssembler.createLink("api/drafts/moneyOrders", "POST", "wizzo-write"));
 
-	private static final Set<String> blacklistedKeys = ImmutableSet.of(
-			"settings");
+        hypermedia.put("createMoneyRequest", hypermediaAssembler.createLink("api/moneyRequests", "POST", "wizzo-write"));
+        hypermedia.put("createMoneyRequestDraft", hypermediaAssembler.createLink("api/drafts/moneyRequests", "POST", "wizzo-write"));
+
+        hypermedia.put("recharge", hypermediaAssembler.createLink("api/recharges", "POST", "wizzo-recharges"));
+        hypermedia.put("rechargeCards", hypermediaAssembler.createLink("api/cards", "GET", "wizzo-recharges"));
+
+        hypermedia.put("wallet", hypermediaAssembler.createLink("api/cards", "GET", "wizzo-read"));
+        hypermedia.put("createCard", hypermediaAssembler.createLink("api/cards", "POST", "wizzo-write"));
+
+        return hypermedia;
+    }
+
+    @Autowired
+    private CustomersFactory customersFactory;
+
+    @Autowired
+    private HypermediaAssembler hypermediaAssembler;
+
+    @Autowired
+    private IdCardValidator idCardValidator;
+
 }

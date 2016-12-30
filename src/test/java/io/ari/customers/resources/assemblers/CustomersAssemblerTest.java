@@ -264,12 +264,12 @@ public class CustomersAssemblerTest {
 	}
 
 	@Test
-	public void shouldNotHaveSettings() {
+	public void shouldHaveSettings() {
 		Map<String, Object> customerData = createCustomerEntity();
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 
-		assertFalse("Returned customer dto cannot have a settings item.", customerDto.containsKey("settings"));
+		assertTrue("Returned customer dto cannot have a settings item.", customerDto.containsKey("settings"));
 	}
 
 	private Map<String, Object> createCustomerEntity() {

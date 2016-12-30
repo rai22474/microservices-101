@@ -1,12 +1,14 @@
 package stepdefinitions.customers;
 
+import com.google.common.collect.ImmutableMap;
 import io.ari.RestClient;
-import io.ari.RestJsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
@@ -16,24 +18,30 @@ import static org.junit.Assert.assertEquals;
 @Scope("cucumber-glue")
 public class CustomersRegistry {
 
-	public void registerCustomer(String id, String code) {
-		customersByCode.put(code, id);
-	}
+    public void registerCustomer(String id, String code) {
+        customersByCode.put(code, id);
+        customersId.add(id);
+    }
 
-	public void deleteRegisterCustomers() {
-		customersByCode.keySet()
-				.stream()
-				.map(customersByCode::get)
-				.forEach(this::deleteClient);
-	}
+    public void deleteCustomers() {
+        customersId
+                .stream()
+                .forEach(this::deleteClient);
+    }
 
-	private void deleteClient(String customerIdentifier) {
-		Response response = restClient.delete("customers/" + customerIdentifier);
-		assertEquals("The customer:" + customerIdentifier + " -> must be correctly deleted", 204, response.getStatus());
-	}
+    public String getCustomerId(String customerIdCard) {
+        return customersByCode.get(customerIdCard);
+    }
 
-	@Autowired
-	private RestClient restClient;
+    private void deleteClient(String customerIdentifier) {
+        Response response = restClient.delete("me", ImmutableMap.of("x-customer-id", customerIdentifier));
+        assertEquals("The customer:" + customerIdentifier + " -> must be correctly deleted", 204, response.getStatus());
+    }
 
-	private Map<String, String> customersByCode = newHashMap();
+    @Autowired
+    private RestClient restClient;
+
+    private Map<String, String> customersByCode = newHashMap();
+
+    private List<String> customersId = new ArrayList<>();
 }

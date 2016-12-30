@@ -8,8 +8,8 @@ Feature: Retrieve me information
   I want query me information
 
   Scenario: Find data for the logged client
-    Given an bunch of customers with identity cards "94465684S,Y8197160C,P4544208D,42854637W"
-    And the customer "94465684S" is correct logged
+    Given an bunch of customers with identity cards "50861048K,79986535X,19970756V,20595487E"
+    And the customer "50861048K" is correct logged
     When i request the current customer data
     Then the response must be "OK"
     And have the customer common data
@@ -28,7 +28,7 @@ Feature: Retrieve me information
       | editSettings                |
 
   Scenario: Return not found when find the user data when logged user don't exists
-    Given an bunch of customers with identity cards "94465684S,Y8197160C,P4544208D,42854637W"
+    Given an bunch of customers with identity cards "50861048K,79986535X,19970756V,20595487E"
     And the customer "94465684S" is correct logged but don't exists in the active customers
     When i request the current customer data
     Then the response must be "NOT_FOUND"

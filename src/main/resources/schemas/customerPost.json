@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "customerPost",
+  "type": "object",
+  "required": [
+    "name",
+    "lastName",
+    "email",
+    "idCard",
+    "termsAndConditions"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "idCard": {
+      "type": "string"
+    },
+    "mobilePhone": {
+      "type": "string"
+    },
+    "termsAndConditions": {
+      "type": "boolean",
+      "enum": [
+        true
+      ]
+    },
+    "memberOf": {
+      "type": "string"
+    }
+  }
+}

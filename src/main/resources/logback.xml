@@ -1,0 +1,73 @@
+<configuration>
+
+    <appender name="EXCEPTIONS-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>wizzo-write-exceptions.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>wizzo-write-exceptions.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.wizzo.logs.exceptionLogger" level="ERROR">
+        <appender-ref ref="EXCEPTIONS-FILE"/>
+    </logger>
+
+    <appender name="MONITOR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>wizzo-write-monitor.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>wizzo-write-monitor.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.wizzo.logs.monitorLogger" level="DEBUG">
+        <appender-ref ref="MONITOR-FILE"/>
+    </logger>
+
+    <appender name="TRACE-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>wizzo-write-trace.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>wizzo-write-trace.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.wizzo.logs.traceLogger" level="DEBUG">
+        <appender-ref ref="TRACE-FILE"/>
+    </logger>
+
+    <logger name="com.wizzo.logs.restServicesLogger" level="TRACE">
+        <appender-ref ref="TRACE-FILE"/>
+    </logger>
+
+    <root level="off">
+    </root>
+
+</configuration>
