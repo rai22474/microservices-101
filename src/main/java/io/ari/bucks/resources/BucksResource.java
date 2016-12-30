@@ -1,7 +1,7 @@
-package io.ari.bucks.domain.resources;
+package io.ari.bucks.resources;
 
 import io.ari.bucks.domain.repositories.BucksRepository;
-import io.ari.bucks.domain.resources.assemblers.BucksAssembler;
+import io.ari.bucks.resources.assemblers.BucksAssembler;
 import io.ari.repositories.exceptions.EntityNotFound;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;

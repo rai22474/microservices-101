@@ -1,4 +1,4 @@
-package io.ari.bucks.domain.resources.assemblers;
+package io.ari.bucks.resources.assemblers;
 
 import io.ari.assemblers.HypermediaAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
