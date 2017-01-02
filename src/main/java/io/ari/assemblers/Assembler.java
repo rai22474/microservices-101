@@ -29,7 +29,7 @@ public abstract class Assembler {
 			dtosJson.put("paging", createPagingInformation(pageSize, page, moreElements));
 		}
 
-		dtosJson.put("_links", hypermediaAssembler.createHypermedia(getCollectionSelfLink(),"wizzo-read"));
+		dtosJson.put("_links", hypermediaAssembler.createHypermedia(getCollectionSelfLink(),"ari-read"));
 
 		return dtosJson;
 	}

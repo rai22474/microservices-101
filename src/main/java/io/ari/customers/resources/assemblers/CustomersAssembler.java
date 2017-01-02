@@ -39,7 +39,7 @@ public class CustomersAssembler extends Assembler {
     }
 
     public Map<String, Object> convertEntityToDto() {
-        return of("_links", hypermediaAssembler.createHypermedia("api/me", "wizzo-read"));
+        return of("_links", hypermediaAssembler.createHypermedia("api/me", "ari-read"));
     }
 
     @Override
@@ -60,25 +60,25 @@ public class CustomersAssembler extends Assembler {
     }
 
     private Map<String, Object> getCustomerHypermedia() {
-        Map<String, Object> hypermedia = hypermediaAssembler.createHypermedia("api/me", "wizzo-read");
+        Map<String, Object> hypermedia = hypermediaAssembler.createHypermedia("api/me", "ari-read");
 
-        hypermedia.put("bucks", hypermediaAssembler.createLink("api/bucks", "GET", "wizzo-read"));
-        hypermedia.put("movements", hypermediaAssembler.createLink("api/movements", "GET", "wizzo-read"));
-        hypermedia.put("settings", hypermediaAssembler.createLink("api/settings", "GET", "wizzo-read"));
-        hypermedia.put("editSettings", hypermediaAssembler.createLink("api/settings", "PUT", "wizzo-write"));
-        hypermedia.put("editMe", hypermediaAssembler.createLink("api/me", "PUT", "wizzo-write"));
+        hypermedia.put("bucks", hypermediaAssembler.createLink("api/bucks", "GET", "ari-read"));
+        hypermedia.put("movements", hypermediaAssembler.createLink("api/movements", "GET", "ari-read"));
+        hypermedia.put("settings", hypermediaAssembler.createLink("api/settings", "GET", "ari-read"));
+        hypermedia.put("editSettings", hypermediaAssembler.createLink("api/settings", "PUT", "ari-write"));
+        hypermedia.put("editMe", hypermediaAssembler.createLink("api/me", "PUT", "ari-write"));
 
-        hypermedia.put("createMoneyOrder", hypermediaAssembler.createLink("api/moneyOrders", "POST", "wizzo-write"));
-        hypermedia.put("createMoneyOrderDraft", hypermediaAssembler.createLink("api/drafts/moneyOrders", "POST", "wizzo-write"));
+        hypermedia.put("createMoneyOrder", hypermediaAssembler.createLink("api/moneyOrders", "POST", "ari-write"));
+        hypermedia.put("createMoneyOrderDraft", hypermediaAssembler.createLink("api/drafts/moneyOrders", "POST", "ari-write"));
 
-        hypermedia.put("createMoneyRequest", hypermediaAssembler.createLink("api/moneyRequests", "POST", "wizzo-write"));
-        hypermedia.put("createMoneyRequestDraft", hypermediaAssembler.createLink("api/drafts/moneyRequests", "POST", "wizzo-write"));
+        hypermedia.put("createMoneyRequest", hypermediaAssembler.createLink("api/moneyRequests", "POST", "ari-write"));
+        hypermedia.put("createMoneyRequestDraft", hypermediaAssembler.createLink("api/drafts/moneyRequests", "POST", "ari-write"));
 
-        hypermedia.put("recharge", hypermediaAssembler.createLink("api/recharges", "POST", "wizzo-recharges"));
-        hypermedia.put("rechargeCards", hypermediaAssembler.createLink("api/cards", "GET", "wizzo-recharges"));
+        hypermedia.put("recharge", hypermediaAssembler.createLink("api/recharges", "POST", "ari-recharges"));
+        hypermedia.put("rechargeCards", hypermediaAssembler.createLink("api/cards", "GET", "ari-recharges"));
 
-        hypermedia.put("wallet", hypermediaAssembler.createLink("api/cards", "GET", "wizzo-read"));
-        hypermedia.put("createCard", hypermediaAssembler.createLink("api/cards", "POST", "wizzo-write"));
+        hypermedia.put("wallet", hypermediaAssembler.createLink("api/cards", "GET", "ari-read"));
+        hypermedia.put("createCard", hypermediaAssembler.createLink("api/cards", "POST", "ari-write"));
 
         return hypermedia;
     }

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 
 import io.ari.bucks.domain.Bucks;
 import io.ari.bucks.domain.repositories.assemblers.BucksStorageAssembler;
+import io.ari.cards.domain.repositories.CardsRepository;
 import io.ari.repositories.entities.EntitiesRepository;
 import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,12 @@ public class BucksRepository extends EntitiesRepository<Bucks> {
 		return super.save(bucks);
 	}
 
-	public Bucks deleteByCustomerId(String customerId) {
-	/*	Bucks bucks = findByCustomerId(customerId);
+	public void deleteCustomer(String customerId) {
+
+		/*	Bucks bucks = findByCustomerId(customerId);
 		bankingService.deleteAgreement(bucks.getBankingServiceAgreementId());
 		getWriteRepository().delete(bucksByCustomerFilter(customerId));
 		return bucks;*/
-		return null;
 	}
 
 	public Bucks findByBankingServiceId(String bankingServiceId) throws EntityNotFound {
@@ -68,6 +69,7 @@ public class BucksRepository extends EntitiesRepository<Bucks> {
 	}
 
 	private Map<String,String> customerBucks = new HashMap<>();
+
 //	@Autowired
 //	private BankingService bankingService;
 }

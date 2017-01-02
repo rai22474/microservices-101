@@ -1,6 +1,6 @@
 # language: en
 @deleteCustomer
-Feature: Customer registration in wizzo
+Feature: Customer registration
 
   As a customer,
   I need to register on the application to create my own account and have a mechanism to log into my own account
@@ -17,13 +17,13 @@ Feature: Customer registration in wizzo
     Then the response must be "CREATED"
     And the response has links to
       | link | api        | href   |
-      | self | wizzo-read | api/me |
+      | self | ari-read | api/me |
     And therefore, it exists a customer, identified by "43r34t-rgertwe-rw43" with the following data:
       | name | lastName | idCard    | email         |
       | Bart | Simpson  | 50861048K | lmb@gmail.com |
     And the customer "50861048K" has a card with the following data:
-      | cardType | bankingServiceCardId | pan              | image            | name | lastName |
-      | tva      | 9afj98asdf           | 400000******2419 | virtual-card.png | Bart | Simpson  |
+      | type | bankingServiceCardId | pan              | image            | name | lastName |
+      | tva  | 9afj98asdf           | 400000******2419 | virtual-card.png | Bart | Simpson  |
 
   Scenario: Register a new person and verifying its bucks limits
     When a person is registered in the system with the following data:
@@ -73,7 +73,7 @@ Feature: Customer registration in wizzo
   Scenario Outline: Bad request when not sending required properties
     When a person is registered in the system with the following properties:
       | id         | name   | lastName   | idCard   | email   | mobilePhone   | termsAndConditions   | mobilePhone |
-      | lahdsfalsd | <name> | <lastName> | <idCard> | <email> | <mobilePhone> | <termsAndConditions> |    777777777         |
+      | lahdsfalsd | <name> | <lastName> | <idCard> | <email> | <mobilePhone> | <termsAndConditions> | 777777777   |
     Then the response must be "<responseStatus>"
 
     Examples:

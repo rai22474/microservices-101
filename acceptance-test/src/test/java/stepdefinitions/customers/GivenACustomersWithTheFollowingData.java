@@ -4,19 +4,19 @@ import com.google.common.collect.ImmutableMap;
 import cucumber.api.java.en.Given;
 import io.ari.CucumberContext;
 import io.ari.RestClient;
+import io.ari.RestJsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import stepdefinitions.cards.CardsRegistry;
 
 import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static org.junit.Assert.assertEquals;
 
 @ContextConfiguration("classpath:cucumber.xml")
-public class GivenABunchOfCustomers {
+public class GivenACustomersWithTheFollowingData {
 
 	@Given("^a customers with the following data:$")
 	public void a_customers_with_the_following_data(List<Map<String, Object>> customers) {
@@ -38,21 +38,22 @@ public class GivenABunchOfCustomers {
 	private void registerCreatedCard(Map<String, Object> fullCustomer) {
 		String customerId = (String) fullCustomer.get("id");
 
-		/*
-		agreementsExtractorService.findByCustomerAndType(customerId, "card")
-				.forEach(card -> cardsRegistry.add(customerId,
-						(String) card.get("cardType"),
-						(String) card.get("id"))
-				);*/
-	}
+		Map<String, Object> headers = new HashMap<>();
+		headers.put("x-customer-id", customerId);
 
-	private void configureBankingServiceForCreateAgreement(Map<String, Object> customerData) {
-		Map<String, Object> card = ImmutableMap.of(
-						"type", "tva",
-						"cardId", customerData.get("bankingServiceCardId"),
-						"pan", "2349823894284823",
-						"image", "image.png",
-						"status", "active");
+		Response cardsResponse = restClient.get("cards", headers);
+		assertEquals("Cards for " + customerId + " must exist.", 200, cardsResponse.getStatus());
+
+		Map<String, Object> agreementsResponseMap = restJsonReader.read(cardsResponse);
+		Collection<Map<String,Object>> customerCards = (Collection<Map<String, Object>>) agreementsResponseMap.get("items");
+
+		System.out.println(customerCards);
+
+		customerCards
+				.forEach(card -> cardsRegistry.add(customerId,
+						(String) card.get("type"),
+						(String) card.get("id"))
+				);
 	}
 
 	private void postCustomer(Map<String, Object> customerData) {
@@ -86,10 +87,9 @@ public class GivenABunchOfCustomers {
 	@Autowired
 	private CustomersRegistry customersRegistry;
 
-	/*@Autowired
-	private CardsRegistry cardsRegistry;
+	@Autowired
+	private RestJsonReader restJsonReader;
 
 	@Autowired
-	private AgreementsExtractorService agreementsExtractorService;
-*/
+	private CardsRegistry cardsRegistry;
 }

@@ -39,6 +39,9 @@ public class CustomersResource {
                     .body(ImmutableMap.of(
                             "code", "invalidIdCard",
                             "description", "Attempting to create a customer with invalid idCard"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 

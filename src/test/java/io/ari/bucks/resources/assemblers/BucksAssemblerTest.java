@@ -72,7 +72,7 @@ public class BucksAssemblerTest {
 		Map<String, Object> hypermedia = new HashMap<>();
 		hypermedia.put("self", bucksLink);
 		
-		when(hypermediaAssembler.createHypermedia("api/bucks","wizzo-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createHypermedia("api/bucks","ari-read")).thenReturn(hypermedia);
 		
 		Map<String,Object> bucksDto = bucksAssembler.convertEntitiesToDto(bucks);
 		Map<String,Object> links = (Map<String, Object>) bucksDto.get("_links");

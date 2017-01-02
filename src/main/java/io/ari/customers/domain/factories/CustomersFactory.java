@@ -63,5 +63,4 @@ public class CustomersFactory {
 
 	@Autowired
 	private BucksFactory bucksFactory;
-
 }

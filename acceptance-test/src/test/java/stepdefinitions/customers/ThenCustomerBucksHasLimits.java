@@ -29,7 +29,6 @@ public class ThenCustomerBucksHasLimits {
 
 		assertEquals("Bucks for " + customerId + " must exist.", 200, buckResponse.getStatus());
 		Map<String,Object> returnedBucks = restJsonReader.read(buckResponse);
-		System.out.println(returnedBucks);
 
 		assertTrue("Customer bucks must have limits.", returnedBucks.containsKey("limits"));
 		verifyRechargeLimits((Map<String, Object>) returnedBucks.get("limits"), limitsData.stream().findFirst().get());

@@ -65,6 +65,6 @@ public class HypermediaAssemblerTest {
 
 	private static final String TEST_URI = "/anyUri";
 
-	private static final String TEST_API = "wizzo-read";
+	private static final String TEST_API = "ari-read";
 
 }

@@ -88,7 +88,7 @@ public class CustomersAssemblerTest {
 		Map<String, Object> customerData = createCustomerEntity();
 		Map<String, Object> hypermedia = newHashMap();
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");
@@ -107,8 +107,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> bucks = newHashMap();
 		bucks.put("href", "api/bucks");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/bucks", "GET", "wizzo-read")).thenReturn(bucks);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/bucks", "GET", "ari-read")).thenReturn(bucks);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");
@@ -129,8 +129,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> expectedLinks = newHashMap();
 		expectedLinks.put("href", "api/movements");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/movements", "GET", "wizzo-read")).thenReturn(expectedLinks);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/movements", "GET", "ari-read")).thenReturn(expectedLinks);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");
@@ -151,8 +151,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> expectedLinks = newHashMap();
 		expectedLinks.put("href", "api/cards");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/cards", "GET", "wizzo-read")).thenReturn(expectedLinks);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/cards", "GET", "ari-read")).thenReturn(expectedLinks);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");
@@ -173,8 +173,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> expectedLinks = newHashMap();
 		expectedLinks.put("href", "api/cards");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/cards", "POST", "wizzo-write")).thenReturn(expectedLinks);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/cards", "POST", "ari-write")).thenReturn(expectedLinks);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 
@@ -192,8 +192,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> expectedLink = newHashMap();
 		expectedLink.put("href", "api/recharges");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/recharges", "POST", "wizzo-recharges")).thenReturn(expectedLink);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/recharges", "POST", "ari-recharges")).thenReturn(expectedLink);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");
@@ -212,8 +212,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> expectedLink = newHashMap();
 		expectedLink.put("href", "api/rechargeCards");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/cards", "GET", "wizzo-recharges")).thenReturn(expectedLink);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/cards", "GET", "ari-recharges")).thenReturn(expectedLink);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");
@@ -232,8 +232,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> expectedLink = newHashMap();
 		expectedLink.put("href", "api/me");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/me", "PUT", "wizzo-write")).thenReturn(expectedLink);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/me", "PUT", "ari-write")).thenReturn(expectedLink);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");
@@ -252,8 +252,8 @@ public class CustomersAssemblerTest {
 		Map<String, Object> expectedLink = newHashMap();
 		expectedLink.put("href", "api/settings");
 
-		when(hypermediaAssembler.createHypermedia("api/me", "wizzo-read")).thenReturn(hypermedia);
-		when(hypermediaAssembler.createLink("api/settings", "PUT", "wizzo-write")).thenReturn(expectedLink);
+		when(hypermediaAssembler.createHypermedia("api/me", "ari-read")).thenReturn(hypermedia);
+		when(hypermediaAssembler.createLink("api/settings", "PUT", "ari-write")).thenReturn(expectedLink);
 
 		Map<String, Object> customerDto = customersAssembler.convertEntityToDto(customerData);
 		Map<String, Object> links = (Map<String, Object>) customerDto.get("_links");

@@ -17,7 +17,7 @@ public class BucksAssembler {
 		bucksDto.remove("moneyRequestSpecs");
 		bucksDto.remove("moneyOrderSpecDrafts");
 	
-		bucksDto.put("_links", hypermediaAssembler.createHypermedia(SELF_URI,"wizzo-read"));
+		bucksDto.put("_links", hypermediaAssembler.createHypermedia(SELF_URI,"ari-read"));
 		
 		return bucksDto;
 	}

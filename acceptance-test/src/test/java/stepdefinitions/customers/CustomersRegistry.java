@@ -26,14 +26,14 @@ public class CustomersRegistry {
     public void deleteCustomers() {
         customersId
                 .stream()
-                .forEach(this::deleteClient);
+                .forEach(this::deleteCustomer);
     }
 
     public String getCustomerId(String customerIdCard) {
         return customersByCode.get(customerIdCard);
     }
 
-    private void deleteClient(String customerIdentifier) {
+    private void deleteCustomer(String customerIdentifier) {
         Response response = restClient.delete("me", ImmutableMap.of("x-customer-id", customerIdentifier));
         assertEquals("The customer:" + customerIdentifier + " -> must be correctly deleted", 204, response.getStatus());
     }
