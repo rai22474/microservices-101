@@ -29,15 +29,6 @@ public class GivenBlockedCard {
 		assertEquals(201, response.getStatus());
 	}
 
-	private Map<String, Object> getTva(String customerId) {
-		return new HashMap<>();
-		/*return agreementsExtractorService.findByCustomerAndType(customerId, "card")
-				.stream()
-				.filter(card -> "tva".equals(card.get("cardType")))
-				.findFirst()
-				.get();*/
-	}
-
 	private String getCustomerId(String customerIdCard) {
 		return customersRegistry.getCustomerId(customerIdCard);
 	}
@@ -56,8 +47,4 @@ public class GivenBlockedCard {
 
 	@Autowired
 	private CardsService cardsService;
-
-	//@Autowired
-	//private AgreementsExtractorService agreementsExtractorService;
-
 }
