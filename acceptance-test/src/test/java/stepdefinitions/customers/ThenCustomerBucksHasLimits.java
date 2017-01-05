@@ -59,6 +59,4 @@ public class ThenCustomerBucksHasLimits {
 
 	@Autowired
 	private RestJsonReader restJsonReader;
-
-
 }

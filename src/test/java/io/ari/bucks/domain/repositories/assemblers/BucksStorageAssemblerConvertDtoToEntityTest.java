@@ -32,7 +32,7 @@ public class BucksStorageAssemblerConvertDtoToEntityTest {
 	@Test
 	public void shouldReturnBucksWithId() {
 		Bucks bucks = assembler.convertDtoToEntity(createBucksData());
-		assertEquals("The bucks must be have id", BUCKS_ID, bucks.getId());
+		assertEquals("The bucks must be have id", BANKING_SERVICE_AGREEMENT_ID, bucks.getId());
 	}
 
 	@Test
@@ -161,7 +161,6 @@ public class BucksStorageAssemblerConvertDtoToEntityTest {
 	private Map<String, Object> createBucksData() {
 		Map<String, Object> bucksData = newHashMap();
 
-		bucksData.put("id", BUCKS_ID);
 		bucksData.put("balance", ImmutableMap.of(
 				"available", val("100.10").eur().dto(),
 				"blocked", val("100.10").eur().dto(),
@@ -191,8 +190,6 @@ public class BucksStorageAssemblerConvertDtoToEntityTest {
 
 	@Mock
 	private StorageAssembler<Money> moneyStorageAssembler;
-
-	private static final String BUCKS_ID = "507c7f79bcf86cd7994f6c0e";
 
 	private static final String BANKING_SERVICE_AGREEMENT_ID = "608c7f79cdf86cd7194f6c0e";
 

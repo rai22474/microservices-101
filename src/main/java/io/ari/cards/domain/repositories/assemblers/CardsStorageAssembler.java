@@ -20,12 +20,13 @@ public class CardsStorageAssembler extends StorageAssembler<Card> {
 		Map<String, Object> cardDto = newHashMap(jacksonStorageAssembler.convertEntityToDto(card));
 		cardDto.put("participants", ImmutableList.of(ImmutableMap.of("id", card.getCustomerId())));
 		cardDto.put("type", "card");
+
 		return ImmutableMap.copyOf(cardDto);
 	}
 
 	@Override
 	public Card convertDtoToEntity(Map<String, Object> cardDto) {
-		return jacksonStorageAssembler.convertDtoToEntity(cardDto);
+		return  jacksonStorageAssembler.convertDtoToEntity(cardDto);
 	}
 
 	@Autowired

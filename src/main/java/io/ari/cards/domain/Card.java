@@ -98,7 +98,7 @@ public class Card implements Entity {
 	}
 
 	public void block() {
-        status = Status.BLOCKED;
+		status = Status.BLOCKED;
 	}
 
 	@JsonIgnore
@@ -115,15 +115,35 @@ public class Card implements Entity {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Card{" +
+				"id='" + id + '\'' +
+				", type='" + type + '\'' +
+				", bankingServiceAgreementId='" + bankingServiceAgreementId + '\'' +
+				", bankingServiceCardId='" + bankingServiceCardId + '\'' +
+				", customerId='" + customerId + '\'' +
+				", customerName='" + customerName + '\'' +
+				", customerLastname='" + customerLastname + '\'' +
+				", pan='" + pan + '\'' +
+				", image='" + image + '\'' +
+				", status='" + status + '\'' +
+				'}';
+	}
+
+	@JsonProperty("id")
 	private String id;
 
 	@JsonProperty("cardType")
 	private String type;
 
+	@JsonProperty("bankingServiceAgreementId")
 	private String bankingServiceAgreementId;
 
+	@JsonProperty("bankingServiceCardId")
 	private String bankingServiceCardId;
 
+	@JsonProperty("customerId")
 	private String customerId;
 
 	@JsonProperty("name")
@@ -132,10 +152,13 @@ public class Card implements Entity {
 	@JsonProperty("lastName")
 	private String customerLastname;
 
+	@JsonProperty("pan")
 	private String pan;
 
+	@JsonProperty("image")
 	private String image;
 
+	@JsonProperty("status")
 	private String status;
 
     private static final List<String> BLOCKED_STATUSES = ImmutableList.of(Status.BLOCKED);

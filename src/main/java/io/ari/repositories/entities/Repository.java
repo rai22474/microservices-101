@@ -29,6 +29,10 @@ public class Repository {
         return entities.get(entityId);
     }
 
+    public Map<String, Map<String, Object>> getEntities(){
+        return entities;
+    }
+
     public Optional<Map<String,Object>> findByKey(Map<String, Object> entityKey) {
         return Optional.empty();
     }

@@ -35,7 +35,6 @@ public class BucksStorageAssembler extends StorageAssembler<Bucks> {
 		String customerId = (String) ((List<Map<String, Object>>) bucksData.get("participants")).stream().findFirst().get().get("id");
 		Bucks bucks = new Bucks(customerId, (String) bucksData.get("bankingServiceAgreementId"));
 
-		bucks.setId((String) bucksData.get("id"));
 		assignBalances(bucksData, bucks);
 		assignLimits(bucksData, bucks);
 

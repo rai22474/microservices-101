@@ -5,7 +5,6 @@ import cucumber.api.java.en.And;
 import io.ari.RestClient;
 import io.ari.RestJsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.ws.rs.core.Response;
@@ -31,8 +30,6 @@ public class ThenCustomerHasUpdatedSettings {
 		Response response = requestSender.get("me", headers);
 
 		Map<String, Object> customer = restJsonReader.read(response);
-
-		System.out.println(customer);
 
 		Map<String, Object> settings = (Map<String, Object>) customer.get("settings");
 

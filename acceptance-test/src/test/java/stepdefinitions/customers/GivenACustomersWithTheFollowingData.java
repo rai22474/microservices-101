@@ -47,8 +47,6 @@ public class GivenACustomersWithTheFollowingData {
 		Map<String, Object> agreementsResponseMap = restJsonReader.read(cardsResponse);
 		Collection<Map<String,Object>> customerCards = (Collection<Map<String, Object>>) agreementsResponseMap.get("items");
 
-		System.out.println(customerCards);
-
 		customerCards
 				.forEach(card -> cardsRegistry.add(customerId,
 						(String) card.get("type"),

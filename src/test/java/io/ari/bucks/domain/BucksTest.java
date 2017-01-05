@@ -33,31 +33,8 @@ public class BucksTest {
 	}
 
 	@Test
-	public void shouldValidateDuringWithdrawal() {
-		Money amountToWithdraw = val("100.10").eur().entity();
-		Set<Violation> violations = ImmutableSet.of(mock(Violation.class));
-		when(bucksWithdrawalValidator.validate(bucks, amountToWithdraw)).thenReturn(violations);
-
-		Collection<Violation> returnedViolations = bucks.canWithdraw(amountToWithdraw);
-
-		assertEquals("Withdrawal validation must return the bucksWithdrawalValidator produced violations.", violations, returnedViolations);
-	}
-
-	@Test
-	public void shouldValidateDuringReception() {
-		Money amountToReceive = val("100.10").eur().entity();
-		Set<Violation> violations = ImmutableSet.of(mock(Violation.class));
-		when(bucksReceptionValidator.validate(bucks, amountToReceive)).thenReturn(violations);
-
-		Collection<Violation> returnedViolations = bucks.canReceive(amountToReceive);
-
-		assertEquals("Reception validation must return the bucksReceptionValidator produced violations.", violations, returnedViolations);
-	}
-
-	@Test
 	public void  shouldChangeTheLastRechargeLimitWhenReceiveMoney() {
 		Money amountToReceive = val("100.10").eur().entity();
-		
 		bucks.receiveMoney(amountToReceive);
 		
 		assertEquals("The last recharge is not the expected.", val("100.10").eur().entity(), bucks.getLastRecharge());
@@ -66,22 +43,11 @@ public class BucksTest {
 	@Test
 	public void shouldDecreaseRemainingRechargeLimitWhenReceiveMoney() {
 		Money amountToReceive = val("100.10").eur().entity();
-		
 		bucks.receiveMoney(amountToReceive);
 		
 		assertEquals("The remain rechage limits is not the expected.", val("2399.90").eur().entity(), bucks.getRemainingRechargeLimit());
 	}
 	
-	@Test
-	public void shouldHaveEnoughFundsToRequestMoney() {
-		bucks.setThisPeriodRechargeLimit(val("2300.0").eur().entity());
-
-		Collection<Violation> returnedViolations = bucks.canReceive(val("100.10").eur().entity());
-
-		assertNotNull("Returned violations cannot be null.", returnedViolations);
-		assertTrue("It must return no violations.", returnedViolations.isEmpty());
-	}
-
 	@Test
 	public void shouldReturnAnIdForMoneyBlock() {
 		String blockedId = bucks.blockBalance(val("3.40").eur().entity());
@@ -157,7 +123,6 @@ public class BucksTest {
 		assertEquals("The total balance must be 22.60", val("22.60").eur().entity(),bucks.getTotalBalance());
 	}
 
-
 	@InjectMocks
 	private Bucks bucks = new Bucks(CUSTOMER_ID, AGREEMENT_ID);
 	
@@ -173,5 +138,4 @@ public class BucksTest {
 	private static final String CUSTOMER_ID = "a9sd76a7sd6a9s6";
 
 	private static final String AGREEMENT_ID = "ad987d9a75d86a46784f";
-
 }

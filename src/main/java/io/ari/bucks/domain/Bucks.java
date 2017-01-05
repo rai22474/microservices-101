@@ -1,21 +1,14 @@
 package io.ari.bucks.domain;
 
 
-import io.ari.bussinessRules.BusinessRulesValidator;
-import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.repositories.entities.Entity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Configurable(dependencyCheck = true)
 public class Bucks implements Entity {
 
 	public Bucks(String customerId, String bankingServiceAgreementId) {
@@ -24,19 +17,11 @@ public class Bucks implements Entity {
 		this.bankingServiceAgreementId = bankingServiceAgreementId;
 	}
 
-	public Collection<Violation> canReceive(Money amount) {
-		return bucksReceptionValidator.validate(this, amount);
-	}
-
 	public void receiveMoney(Money amount) {
 		thisPeriodRechargeLimit = thisPeriodRechargeLimit.add(amount);
 		lastRecharge = amount;
 		
 		totalBalance = totalBalance.add(amount);
-	}
-
-	public Collection<Violation> canWithdraw(Money amount) {
-		return bucksWithdrawalValidator.validate(this, amount);
 	}
 
 	public void withdrawMoney(Money amount) {
@@ -134,7 +119,7 @@ public class Bucks implements Entity {
 	
 	@Override
 	public String toString() {
-		return "Bucks [totalBalance=" + totalBalance + ", coinJarsBalance=" 
+		return "Bucks [totalBalance=" + totalBalance
 				+ ", maxRechargeLimit=" + maxRechargeLimit + ", lastRechargeLimit="
 				+ lastRecharge + ", thisPeriodRechargeLimit=" + thisPeriodRechargeLimit + ", daysTillMaxLimit=" + daysTillMaxLimit + ", id="
 				+ id + ", blockedBalances=" + blockedBalances + ", bankingServiceAgreementId=" + bankingServiceAgreementId + "]";
@@ -157,13 +142,4 @@ public class Bucks implements Entity {
 	private String bankingServiceAgreementId;
 
 	private String customerId;
-
-	@Autowired
-	@Qualifier("bucksWithdrawalValidator")
-	private BusinessRulesValidator<Bucks> bucksWithdrawalValidator;
-
-	@Autowired
-	@Qualifier("bucksReceptionValidator")
-	private BusinessRulesValidator<Bucks> bucksReceptionValidator;
-
 }
