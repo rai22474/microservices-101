@@ -26,7 +26,7 @@ public class MoneyOrderBundleDraftsResource {
 	public ResponseEntity createMoneyOrderBundleDraft(@RequestHeader("x-customer-id") @NotEmpty String customerId,
 													  @RequestBody @NotNull Map<String, Object> moneyOrderBundleDraftDto) throws EntityNotFound {
 		try {
-			MoneyOrderBundle moneyOrderBundleDraft = publishDraftCommand(customerId, moneyOrderBundleDraftDto);
+			MoneyOrderBundle moneyOrderBundleDraft = processDraftCommand(customerId, moneyOrderBundleDraftDto);
 			Map<String, Object> publishedDraftDto = assembler.convertEntityToDto(moneyOrderBundleDraft);
 
 			return ResponseEntity
@@ -38,7 +38,7 @@ public class MoneyOrderBundleDraftsResource {
 		}
 	}
 
-	private MoneyOrderBundle publishDraftCommand(String customerId, Map<String, Object> moneyOrderBundleDraftDto) throws EntityNotFound {
+	private MoneyOrderBundle processDraftCommand(String customerId, Map<String, Object> moneyOrderBundleDraftDto) throws EntityNotFound {
 		MoneyOrderBundle moneyOrderBundle = repository.save(assembler.convertDtoToEntity(customerId, moneyOrderBundleDraftDto));
 
 		Collection<Violation> violations = validator.validate(moneyOrderBundle);

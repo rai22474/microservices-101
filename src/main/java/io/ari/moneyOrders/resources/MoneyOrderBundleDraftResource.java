@@ -40,13 +40,12 @@ public class MoneyOrderBundleDraftResource {
 
     private MoneyOrderBundle modifyExistingDraft(String customerId, String draftId, Map<String, Object> moneyOrderBundleDraft) throws EntityNotFound {
         MoneyOrderBundle newDraft = assembler.convertDtoToExistingEntity(customerId, draftId, moneyOrderBundleDraft);
-        MoneyOrderBundle updatedDraft = repository.update(draftId, newDraft);
+        repository.update(draftId, newDraft);
 
+        Collection<Violation> violations = validator.validate(newDraft);
+        newDraft.setViolations(violations);
 
-        Collection<Violation> violations = validator.validate(updatedDraft);
-        updatedDraft.setViolations(violations);
-
-        return updatedDraft;
+        return newDraft;
     }
 
     @Autowired
