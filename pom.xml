@@ -95,8 +95,8 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <mockito.version>1.9.5</mockito.version>
-        <powermock.version>1.5.5</powermock.version>
+        <mockito.version>1.10.19</mockito.version>
+        <powermock.version>1.6.6</powermock.version>
         <joda.version>2.3</joda.version>
         <maven-resources-plugin.version>2.6</maven-resources-plugin.version>
     </properties>

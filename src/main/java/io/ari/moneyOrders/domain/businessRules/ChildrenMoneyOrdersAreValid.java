@@ -31,8 +31,7 @@ public class ChildrenMoneyOrdersAreValid implements BusinessRule<MoneyOrderBundl
 	}
 
 	private Collection<Violation> validate(MoneyOrder moneyOrder) {
-		Collection<Violation> violations = businessRulesValidator.validate(moneyOrder);
-		return violations;
+		return businessRulesValidator.validate(moneyOrder);
 	}
 
 	@Autowired
