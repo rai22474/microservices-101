@@ -51,8 +51,8 @@ public class CommandsRegistry {
 	}
 	
 	private void delete(String commandId) {
-		deleteSubCommandsFrom(commandId);
-		Response response = dataLoaderClient.delete("commands/" + commandId);
+		//deleteSubCommandsFrom(commandId);
+		Response response = dataLoaderClient.delete("moneyRequests/" + commandId);
 		assertEquals("The command " + commandId + " must be correctly deleted", 204, response.getStatus());
 	}
 
@@ -84,7 +84,5 @@ public class CommandsRegistry {
 	private Map<String,String> indexedById = new HashMap<>();
 	
 	private LinkedList<String> commandIds = new LinkedList<>();
-
-
 
 }

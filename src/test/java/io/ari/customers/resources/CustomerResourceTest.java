@@ -20,7 +20,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class CustomerResourceTest {
 
-
 	@Test
 	public void shouldReturnMe() throws EntityNotFound{
 		final Map<String,Object> clientData = new HashMap<>();

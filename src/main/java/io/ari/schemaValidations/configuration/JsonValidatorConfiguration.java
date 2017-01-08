@@ -1,4 +1,4 @@
-package io.ari.validations.configuration;
+package io.ari.schemaValidations.configuration;
 
 import com.google.common.collect.ImmutableMap;
 import org.springframework.context.annotation.Bean;

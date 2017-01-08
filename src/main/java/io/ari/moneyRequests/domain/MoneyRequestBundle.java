@@ -52,16 +52,16 @@ public class MoneyRequestBundle implements Entity{
 		return moneyRequestBundle;
 	}
 
-	/*
+
 	public void submit() {
-		requests.stream().forEach(
+		/*requests.stream().forEach(
 				request -> {
 					Future<String> submissionFuture = future(() -> request.submit(getBucksId(), reason), actorSystem.dispatcher());
 					submissionFuture.onSuccess(successCallback(moneyRequestSubmitted(request.getId(), id, moneyRequestBundlesRepository)),
 							actorSystem.dispatcher());
-				});
+				});*/
 	}
-
+/*
 	private Consumer<String> moneyRequestSubmitted(String moneyRequestId,
 												   String moneyRequestBundleId,
 												   MoneyRequestBundlesRepository moneyRequestBundlesRepository) {

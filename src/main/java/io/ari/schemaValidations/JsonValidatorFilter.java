@@ -1,4 +1,4 @@
-package io.ari.validations;
+package io.ari.schemaValidations;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
