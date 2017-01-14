@@ -18,7 +18,7 @@ mvn clean test
 
 ####Run
 
-java -jar target/kuwagara-0.1.0.jar
+java -jar target/ari-0.1.0.jar
 
 ####Acceptance Test
 
