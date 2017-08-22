@@ -1,26 +1,26 @@
-##Ari
+## Ari
 
 Ari means ant in japanese, the reason of the name is the Aesop's Fable 'The Ant and the Grasshopper'.
 
 
-###Prerequisites
+### Prerequisites
 
  * Java 8
  * Maven 3.0
 
-####Build
+#### Build
 
 mvn clean package
 
-####Test
+#### Test
 
 mvn clean test
 
-####Run
+#### Run
 
 java -jar target/ari-0.1.0.jar
 
-####Acceptance Test
+#### Acceptance Test
 
 * cd acceptance-test
 * mvn test
