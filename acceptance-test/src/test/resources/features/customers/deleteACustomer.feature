@@ -13,4 +13,4 @@ Feature: Customer delete
   Scenario: Delete customer happy path
     When customer "79986535X" deletes his account:
     Then the response must be "NO_CONTENT"
-    And the customer "79986535X" account is deleted from the system:
+    And the customer "79986535X" account is deleted from the system

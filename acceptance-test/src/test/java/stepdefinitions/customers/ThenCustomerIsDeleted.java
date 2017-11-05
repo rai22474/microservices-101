@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 @ContextConfiguration("classpath:cucumber.xml")
 public class ThenCustomerIsDeleted {
 
-	@And("^the customer \"(.*?)\" account is deleted from the system:$")
+	@And("^the customer \"(.*?)\" account is deleted from the system$")
 	public void customerIsDeleted(String customerIdCard) {
 		String customerId = customersRegistry.getCustomerId(customerIdCard);
 		Response subjectResponse = dataExtractorClient.get("subjects/" + customerId);
