@@ -1,8 +1,14 @@
+## Microservices 1010
+
+El objetivo de este learning path es recorrer de una forma práctica algunos los aspectos de los aspectos más relevantes que influyen tener éxito a la hora de desarrollar una arquitectura de microservicios.
+
+Este curso amplía [Herding microservices](https://www.youtube.com/playlist?list=PLfAoTEAPazb4eJflljcW8_Ld2Eclx7hOh), que fue impartido en [Campus Madrid](https://www.campus.co/madrid/es).
+
 ## Ari
 
 Ari significa hormiga en japones. Por la fabula de Esopo, la cigarra y la hormiga.
 
-Este sistema es un monólito, va a servir como base para los ejercicios del [curso microservicios 101](https://github.com/rai22474/ari/wiki).
+Es un sistema monólitico, va a servir como base para los ejercicios del [curso](https://github.com/rai22474/ari/wiki).
 
 Sus funcionalidades principales son:
 
