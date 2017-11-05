@@ -4,7 +4,7 @@ Ari significa hormiga en japones. Por la fabula de Esopo, la cigarra y la hormig
 
 Este sistema es un monólito, va a servir como base para los ejercicios del curso microservicios 101. 
 
-Sus funcionalidadaes principales son:
+Sus funcionalidades principales son:
 
 * Gestión usuarios en el sistema.
 * Bloqueo de la tarjeta virtual anónima.
