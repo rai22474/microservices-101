@@ -1,4 +1,4 @@
-## Microservices 1010
+## Microservices 101
 
 El objetivo de este learning path es recorrer de una forma práctica algunos los aspectos de los aspectos más relevantes que influyen tener éxito a la hora de desarrollar una arquitectura de microservicios.
 
@@ -18,6 +18,8 @@ Sus funcionalidades principales son:
 * Envio de dinero a otro usuario.
  
 ## Instrucciones para ejecutar el proyecto
+
+El código fuente de este proyecto es java. Se usa [Spring boot](https://projects.spring.io/spring-boot/) cómo framework.
 
 ### Prerequisitos
 
