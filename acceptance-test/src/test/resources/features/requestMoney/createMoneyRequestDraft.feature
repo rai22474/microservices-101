@@ -22,7 +22,7 @@ Feature: Create a draft of a money request to other person
       | recharge  |
       | 620.3 EUR |
 
-  Scenario: Create a money request draft with integer amount to other wizzo customer
+  Scenario: Create a money request draft with integer amount to other ari customer
     When customer "79986535X" creates a request draft with "10.0 EUR" to other customer with identifier "Y8197160C" with reason "take the money and run"
     Then the response must be "CREATED"
     And the money request draft doesn't have any errors

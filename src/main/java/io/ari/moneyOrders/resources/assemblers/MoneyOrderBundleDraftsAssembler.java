@@ -28,7 +28,7 @@ public class MoneyOrderBundleDraftsAssembler {
 
 		String selfUri = "api/drafts/moneyOrders/" + moneyOrderBundle.getId();
 		Map<String, Object> links = ImmutableMap.of(
-				"editMoneyOrderDraft", hypermediaAssembler.createLink(selfUri, "PUT", "wizzo-write"));
+				"editMoneyOrderDraft", hypermediaAssembler.createLink(selfUri, "PUT", "ari-write"));
 
 		HashMap<String, Object> draftDto = Maps.newHashMap(moneyOrderBundleDto);
 		draftDto.put("_links", links);

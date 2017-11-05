@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import stepdefinitions.customers.CustomersRegistry;
 
 import javax.ws.rs.core.Response;
+import java.util.*;
 import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;

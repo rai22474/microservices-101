@@ -57,7 +57,7 @@ public class MoneyRequestBundlesAssembler {
 				ImmutableMap.of("self", ImmutableList.of(
 						ImmutableMap.of("method", "GET",
 								"href", "api/movements/" + moneyRequestBundle.getId(),
-								"api", "wizzo-read"))));
+								"api", "ari-read"))));
 
 		return ImmutableMap.copyOf(moneyRequestBundleDto);
 	}

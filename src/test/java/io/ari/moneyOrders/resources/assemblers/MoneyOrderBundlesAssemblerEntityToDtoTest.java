@@ -50,7 +50,7 @@ public class MoneyOrderBundlesAssemblerEntityToDtoTest {
 		when(bundle.getId()).thenReturn(bundleId);
 
 		Map<String, Object> expectedLinks = ImmutableMap.of("self", "daojsdoa");
-		when(hypermediaAssembler.createHypermedia("api/commands/" + bundleId, "wizzo-read")).thenReturn(expectedLinks);
+		when(hypermediaAssembler.createHypermedia("api/commands/" + bundleId, "ari-read")).thenReturn(expectedLinks);
 
 		Map<String, Object> bundleDto = assembler.convertEntityToDto(bundle);
 

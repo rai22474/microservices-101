@@ -68,7 +68,7 @@ public class MoneyOrdersAssemblerEntityToDtoTest {
 	public void shouldReturnRecipient() {
 		when(moneyOrder.getRecipient()).thenReturn(recipient);
 
-		Map<String, Object> recipientDto = createNoWizzoContact();
+		Map<String, Object> recipientDto = createNoAriContact();
 		when(partiesAssembler.convertEntityToDto(recipient)).thenReturn(recipientDto);
 
 		Map<String, Object> moneyOrderDto = moneyOrdersAssembler.convertEntityToDto(moneyOrder);
@@ -114,7 +114,7 @@ public class MoneyOrdersAssemblerEntityToDtoTest {
 		return violation;
 	}
 
-	private Map<String, Object> createNoWizzoContact() {
+	private Map<String, Object> createNoAriContact() {
 		return ImmutableMap.of(
 				"name", "Tippy",
 				"lastName", "Tap",

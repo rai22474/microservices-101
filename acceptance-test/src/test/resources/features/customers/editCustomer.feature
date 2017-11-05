@@ -19,7 +19,7 @@ Feature: Customer edits his information
       | avenida     | Maldonado     | 2            | 4           | B           | 28000    | Madriz | Spain   |
 
   Scenario: a customer updates his previous address
-    Given the customer "79986535X" has the following address in wizzo:
+    Given the customer "79986535X" has the following address in ari:
       | addressType | streetAddress | streetNumber | houseNumber | houseLetter | postcode | town      | country   |
       | calle       | Elm           | 1            | 3           | A           | 28006    | Barcelona | Catalonia |
     When the customer "79986535X" updates his address to:

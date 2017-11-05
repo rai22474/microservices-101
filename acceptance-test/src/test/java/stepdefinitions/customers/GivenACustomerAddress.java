@@ -12,8 +12,8 @@ import java.util.Map;
 
 @ContextConfiguration("classpath:cucumber.xml")
 public class GivenACustomerAddress {
-	@Given("^the customer \"([^\"]*)\" has the following address in wizzo:$")
-	public void the_customer_has_the_following_address_in_wizzo(String customerIdCard, List<Map<String, Object>> addressData) {
+	@Given("^the customer \"([^\"]*)\" has the following address in ari:$")
+	public void the_customer_has_the_following_address_in_ari(String customerIdCard, List<Map<String, Object>> addressData) {
 		Map<String, Object> customer = ImmutableMap.of("name", "Chino", "lastName", "Cudeiro", "address", addressData.stream().findFirst().get());
 
 		String customerId = customersRegistry.getCustomerId(customerIdCard);

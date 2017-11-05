@@ -41,7 +41,7 @@ public class MoneyOrderBundlesAssembler {
 		assignReasonToDto(moneyOrderBundle, moneyOrderBundleDto);
 		assignErrors(moneyOrderBundle, moneyOrderBundleDto);
 
-		moneyOrderBundleDto.put("_links", hypermediaAssembler.createHypermedia("api/commands/" + moneyOrderBundle.getId(), "wizzo-read"));
+		moneyOrderBundleDto.put("_links", hypermediaAssembler.createHypermedia("api/commands/" + moneyOrderBundle.getId(), "ari-read"));
 
 		return ImmutableMap.copyOf(moneyOrderBundleDto);
 	}

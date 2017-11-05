@@ -11,6 +11,8 @@ import stepdefinitions.cards.CardsRegistry;
 
 import javax.ws.rs.core.Response;
 
+import java.util.*;
+
 import static com.google.common.collect.Maps.newHashMap;
 import static org.junit.Assert.assertEquals;
 

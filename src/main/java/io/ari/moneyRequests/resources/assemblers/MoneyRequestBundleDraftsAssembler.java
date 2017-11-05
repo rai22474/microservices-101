@@ -25,7 +25,7 @@ public class MoneyRequestBundleDraftsAssembler {
 		Map<String, Object> moneyRequestBundleDto = moneyRequestBundleAssembler.convertEntityToDto(moneyRequestBundle);
 
 		String selfUri = "api/drafts/moneyRequests/" + moneyRequestBundle.getId();
-		Map<String, Object> links = ImmutableMap.of("editMoneyRequestDraft", hypermediaAssembler.createLink(selfUri, "PUT", "wizzo-write"));
+		Map<String, Object> links = ImmutableMap.of("editMoneyRequestDraft", hypermediaAssembler.createLink(selfUri, "PUT", "ari-write"));
 
 		HashMap<String, Object> draftDto = Maps.newHashMap(moneyRequestBundleDto);
 		draftDto.put("_links", links);
