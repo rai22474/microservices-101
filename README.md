@@ -28,17 +28,17 @@ El código fuente de este proyecto es java. Se usa [Spring boot](https://project
 
 #### Construcción
 
-mvn clean package
+`mvn clean package`
 
 #### Test
 
-mvn clean test
+`mvn clean test`
 
 #### Ejecución
 
-java -jar target/ari-0.1.0.jar
+`java -jar target/ari-0.1.0.jar`
 
 #### Acceptance Test
 
-* cd acceptance-test
-* mvn test
+    cd acceptance-test
+    mvn test
