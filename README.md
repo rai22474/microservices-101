@@ -2,7 +2,7 @@
 
 Ari significa hormiga en japones. Por la fabula de Esopo, la cigarra y la hormiga.
 
-Este sistema es un monólito, va a servir como base para los ejercicios del curso microservicios 101. 
+Este sistema es un monólito, va a servir como base para los ejercicios del [curso microservicios 101](https://github.com/rai22474/ari/wiki).
 
 Sus funcionalidades principales son:
 
@@ -10,6 +10,8 @@ Sus funcionalidades principales son:
 * Bloqueo de la tarjeta virtual anónima.
 * Petición de dinero a otro usuario.
 * Envio de dinero a otro usuario.
+ 
+## Instrucciones para ejecutar el proyecto
 
 ### Prerequisitos
 
