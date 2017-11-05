@@ -4,13 +4,10 @@ import cucumber.api.java.en.Given;
 import io.ari.RestClient;
 import io.ari.RestJsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import stepdefinitions.customers.CustomersRegistry;
 
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 

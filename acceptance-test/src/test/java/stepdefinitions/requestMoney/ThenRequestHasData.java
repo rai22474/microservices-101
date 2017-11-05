@@ -1,17 +1,14 @@
 package stepdefinitions.requestMoney;
 
 
-import java.util.List;
-import java.util.Map;
-
+import cucumber.api.java.en.Then;
 import io.ari.CucumberContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-
 import stepdefinitions.commands.CommandsRegistry;
 
-
-import cucumber.api.java.en.Then;
+import java.util.List;
+import java.util.Map;
 
 @ContextConfiguration("classpath:cucumber.xml")
 public class ThenRequestHasData {

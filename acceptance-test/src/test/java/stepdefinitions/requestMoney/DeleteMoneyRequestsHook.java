@@ -1,10 +1,9 @@
 package stepdefinitions.requestMoney;
 
+import cucumber.api.java.After;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-
 import stepdefinitions.commands.CommandsRegistry;
-import cucumber.api.java.After;
 
 @ContextConfiguration("classpath:cucumber.xml")
 public class DeleteMoneyRequestsHook {

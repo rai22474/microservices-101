@@ -1,18 +1,16 @@
 package stepdefinitions.orderMoney;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import cucumber.api.java.en.Then;
+import io.ari.CucumberContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import io.ari.CucumberContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-
-
-import cucumber.api.java.en.Then;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @ContextConfiguration("classpath:cucumber.xml")
 public class ThenOrderHasRecipientData {

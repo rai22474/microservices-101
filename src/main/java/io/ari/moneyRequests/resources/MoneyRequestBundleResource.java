@@ -1,9 +1,10 @@
 package io.ari.moneyRequests.resources;
 
-import io.ari.repositories.exceptions.EntityNotFound;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.executable.ValidateOnExecution;
 

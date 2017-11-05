@@ -3,7 +3,6 @@ package io.ari.bucks.resources.assemblers;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
-
 import io.ari.money.domain.Money;
 import org.junit.Before;
 import org.junit.Test;

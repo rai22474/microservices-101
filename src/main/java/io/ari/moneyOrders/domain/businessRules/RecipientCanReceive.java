@@ -5,7 +5,6 @@ import io.ari.bussinessRules.BusinessRulesValidator;
 import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyOrders.domain.MoneyOrder;
-import io.ari.moneyOrders.domain.recipients.BucksRecipient;
 import io.ari.moneyOrders.domain.recipients.Recipient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

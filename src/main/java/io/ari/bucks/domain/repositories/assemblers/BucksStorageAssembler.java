@@ -1,10 +1,7 @@
 package io.ari.bucks.domain.repositories.assemblers;
 
-import static com.google.common.collect.Maps.newHashMap;
-
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import io.ari.bucks.domain.Bucks;
 import io.ari.money.domain.Money;
 import io.ari.repositories.assemblers.StorageAssembler;
@@ -12,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.collect.Maps.newHashMap;
 
 @Component
 public class BucksStorageAssembler extends StorageAssembler<Bucks> {

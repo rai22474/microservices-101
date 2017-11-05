@@ -3,10 +3,8 @@ package io.ari.moneyOrders.domain.recipients;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.ari.bucks.domain.Bucks;
-import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 
-import java.util.Collection;
 import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;

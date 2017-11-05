@@ -1,7 +1,6 @@
 package io.ari.cards.resources.assemblers;
 
 import com.google.common.collect.ImmutableMap;
-
 import io.ari.assemblers.HypermediaAssembler;
 import io.ari.cards.domain.Card;
 import io.ari.cards.domain.factories.CardsFactory;

@@ -4,7 +4,6 @@ import io.ari.cards.domain.Card;
 import io.ari.cards.domain.repositories.assemblers.CardsStorageAssembler;
 import io.ari.repositories.entities.EntitiesRepository;
 import io.ari.repositories.exceptions.EntityNotFound;
-import javafx.scene.layout.CornerRadii;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;

@@ -1,12 +1,8 @@
 package io.ari.moneyRequests.domain.repositories;
 
-import com.google.common.collect.ImmutableMap;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
 import io.ari.repositories.assemblers.StorageAssembler;
 import io.ari.repositories.entities.EntitiesRepository;
-import io.ari.repositories.exceptions.EntityNotFound;
-
-import java.util.Map;
 
 public class MoneyRequestBundlesRepository extends EntitiesRepository<MoneyRequestBundle> {
 

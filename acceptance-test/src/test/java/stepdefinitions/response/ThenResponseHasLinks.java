@@ -2,13 +2,13 @@ package stepdefinitions.response;
 
 
 import cucumber.api.java.en.Then;
+import io.ari.CucumberContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import io.ari.CucumberContext;
 
 import static org.junit.Assert.*;
 

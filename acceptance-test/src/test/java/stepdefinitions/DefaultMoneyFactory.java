@@ -1,11 +1,11 @@
 package stepdefinitions;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.collect.ImmutableList;
 
 public abstract class DefaultMoneyFactory extends DefaultFactory {
     @Override

@@ -1,15 +1,12 @@
 package stepdefinitions.customers;
 
+import cucumber.api.java.en.Given;
 import io.ari.CucumberContext;
 import io.ari.RestClient;
-import cucumber.api.java.After;
-import cucumber.api.java.en.Given;
 import jersey.repackaged.com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;

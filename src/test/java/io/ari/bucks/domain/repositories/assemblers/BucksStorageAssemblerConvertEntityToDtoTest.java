@@ -2,7 +2,6 @@ package io.ari.bucks.domain.repositories.assemblers;
 
 import com.google.common.collect.ImmutableMap;
 import io.ari.bucks.domain.Bucks;
-import io.ari.bucks.domain.repositories.assemblers.BucksStorageAssembler;
 import io.ari.money.domain.Money;
 import io.ari.repositories.assemblers.StorageAssembler;
 import org.junit.Before;

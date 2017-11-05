@@ -3,7 +3,6 @@ package io.ari.money;
 import com.google.common.collect.ImmutableMap;
 import io.ari.money.domain.Money;
 
-
 import java.math.BigDecimal;
 import java.util.Map;
 

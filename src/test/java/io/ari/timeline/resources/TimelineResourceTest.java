@@ -2,7 +2,6 @@ package io.ari.timeline.resources;
 
 
 import com.google.common.collect.ImmutableMap;
-
 import io.ari.customers.domain.exceptions.CustomerExists;
 import io.ari.timeline.domain.TimelineEntry;
 import io.ari.timeline.domain.repositories.TimelineRepository;

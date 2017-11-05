@@ -2,17 +2,13 @@ package io.ari.moneyOrders.domain.recipients;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.ImmutableList;
-
 import io.ari.bucks.domain.Bucks;
 import io.ari.bucks.domain.repositories.BucksRepository;
-import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 

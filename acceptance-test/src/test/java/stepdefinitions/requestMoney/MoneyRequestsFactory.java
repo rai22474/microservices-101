@@ -1,23 +1,16 @@
 package stepdefinitions.requestMoney;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import io.ari.CucumberContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import stepdefinitions.DefaultMoneyFactory;
 import stepdefinitions.MoneyFactory;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 @Scope(value = "cucumber-glue")

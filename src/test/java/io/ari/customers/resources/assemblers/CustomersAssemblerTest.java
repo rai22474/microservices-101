@@ -1,7 +1,6 @@
 package io.ari.customers.resources.assemblers;
 
 import com.google.common.collect.ImmutableMap;
-
 import io.ari.assemblers.HypermediaAssembler;
 import org.junit.Test;
 import org.junit.runner.RunWith;

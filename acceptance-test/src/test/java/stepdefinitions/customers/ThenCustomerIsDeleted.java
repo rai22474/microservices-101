@@ -6,7 +6,6 @@ import io.ari.CucumberContext;
 import io.ari.RestClient;
 import io.ari.RestJsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.ws.rs.core.Response;

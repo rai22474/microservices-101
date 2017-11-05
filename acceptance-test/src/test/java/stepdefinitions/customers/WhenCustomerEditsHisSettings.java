@@ -1,21 +1,16 @@
 package stepdefinitions.customers;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.ws.rs.core.Response;
-
+import cucumber.api.java.en.When;
 import io.ari.CucumberContext;
 import io.ari.RestClient;
 import io.ari.RestJsonReader;
 import jersey.repackaged.com.google.common.collect.ImmutableMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-
-
-import cucumber.api.java.en.When;
+import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Map;
 
 @ContextConfiguration("classpath:cucumber.xml")
 public class WhenCustomerEditsHisSettings {

@@ -1,11 +1,10 @@
 package stepdefinitions.customers;
 
-import io.ari.RestClient;
-import io.ari.RestJsonReader;
-import io.ari.CucumberContext;
-
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.ari.CucumberContext;
+import io.ari.RestClient;
+import io.ari.RestJsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 

@@ -2,7 +2,6 @@ package io.ari.moneyOrders.domain.recipients.businessRules.configuration;
 
 import com.google.common.collect.ImmutableSet;
 import io.ari.bussinessRules.BusinessRulesValidator;
-import io.ari.moneyOrders.domain.recipients.BucksRecipient;
 import io.ari.moneyOrders.domain.recipients.Recipient;
 import io.ari.moneyOrders.domain.recipients.businessRules.BucksFromRecipientCanReceive;
 import org.springframework.beans.factory.annotation.Autowired;

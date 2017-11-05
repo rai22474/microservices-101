@@ -1,14 +1,11 @@
 package io.ari.bucks.domain.repositories;
 
 import com.google.common.collect.ImmutableMap;
-
 import io.ari.bucks.domain.Bucks;
 import io.ari.bucks.domain.repositories.assemblers.BucksStorageAssembler;
-import io.ari.cards.domain.repositories.CardsRepository;
 import io.ari.repositories.entities.EntitiesRepository;
 import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

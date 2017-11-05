@@ -1,7 +1,6 @@
 package io.ari.moneyOrders.resources.assemblers;
 
 import com.google.common.collect.ImmutableMap;
-
 import io.ari.assemblers.HypermediaAssembler;
 import io.ari.bucks.domain.Bucks;
 import io.ari.bucks.domain.repositories.BucksRepository;

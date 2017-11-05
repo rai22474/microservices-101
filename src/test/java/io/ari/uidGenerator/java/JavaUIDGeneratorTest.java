@@ -1,6 +1,5 @@
 package io.ari.uidGenerator.java;
 
-import io.ari.uidGenerator.java.JavaUIDGenerator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

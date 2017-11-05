@@ -13,7 +13,6 @@ import stepdefinitions.movements.MovementsRegistry;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

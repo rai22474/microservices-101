@@ -2,7 +2,6 @@ package io.ari.moneyRequests.domain.events;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-
 import io.ari.money.domain.Money;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
 import io.ari.moneyRequests.domain.events.assemblers.MoneyRequestEventsStorageAssembler;

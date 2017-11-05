@@ -1,6 +1,13 @@
 package stepdefinitions.orderMoney;
 
-import static com.google.common.collect.Maps.newHashMap;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import io.ari.CucumberContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import stepdefinitions.DefaultMoneyFactory;
+import stepdefinitions.MoneyFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,16 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import io.ari.CucumberContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-import stepdefinitions.DefaultMoneyFactory;
-import stepdefinitions.MoneyFactory;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
+import static com.google.common.collect.Maps.newHashMap;
 
 
 @Component

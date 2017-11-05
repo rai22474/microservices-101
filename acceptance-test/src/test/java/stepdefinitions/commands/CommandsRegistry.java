@@ -1,21 +1,15 @@
 package stepdefinitions.commands;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import javax.ws.rs.core.Response;
-
 import io.ari.RestClient;
 import io.ari.RestJsonReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import javax.ws.rs.core.Response;
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 @Component
 @Scope(value = "cucumber-glue")

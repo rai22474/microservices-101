@@ -4,8 +4,6 @@ import com.google.common.collect.ImmutableList;
 import org.springframework.stereotype.Component;
 import stepdefinitions.DefaultFactory;
 
-import java.util.*;
-
 @Component
 public class CustomersFactory extends DefaultFactory {
 

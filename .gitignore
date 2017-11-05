@@ -266,3 +266,4 @@ deploy/performance/logs/
 acceptance-tests/deploy/playbooks
 metrics
 coverage
+*.iml

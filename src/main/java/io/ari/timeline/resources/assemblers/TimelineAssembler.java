@@ -1,7 +1,6 @@
 package io.ari.timeline.resources.assemblers;
 
 import com.google.common.collect.ImmutableMap;
-import io.ari.cards.domain.Card;
 import io.ari.timeline.domain.TimelineEntry;
 import org.springframework.stereotype.Component;
 

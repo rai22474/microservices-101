@@ -1,18 +1,15 @@
 package io.ari.customers.resources.assemblers;
 
-import com.google.common.collect.ImmutableSet;
 import io.ari.assemblers.Assembler;
 import io.ari.assemblers.HypermediaAssembler;
 import io.ari.customers.domain.Customer;
 import io.ari.customers.domain.exceptions.CustomerExists;
 import io.ari.customers.domain.factories.CustomersFactory;
-
 import io.ari.customers.resources.assemblers.exceptions.InvalidIdCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-import java.util.Set;
 
 import static com.google.common.collect.ImmutableMap.of;
 import static java.util.stream.Collectors.toMap;
