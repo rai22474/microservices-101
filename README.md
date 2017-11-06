@@ -8,7 +8,7 @@ Este curso amplía [Herding microservices](https://www.youtube.com/playlist?list
 
 Ari significa hormiga en japones. Por la fabula de Esopo, la cigarra y la hormiga.
 
-Es un sistema monólitico, va a servir como base para los ejercicios del [curso](https://github.com/rai22474/microservices-101/wiki).
+Es un sistema monolítico, va a servir como base para los ejercicios del [curso](https://github.com/rai22474/microservices-101/wiki).
 
 Sus funcionalidades principales son:
 
