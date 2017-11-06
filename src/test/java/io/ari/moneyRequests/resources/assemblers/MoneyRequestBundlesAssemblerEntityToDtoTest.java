@@ -12,7 +12,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyRequests.domain.MoneyRequest;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,7 +117,7 @@ public class MoneyRequestBundlesAssemblerEntityToDtoTest {
 	}
 
 	@Before
-	public void prepareCustomerBucks() throws EntityNotFound {
+	public void prepareCustomerBucks() {
 		when(bucksRepository.findBucksByCustomerId(TEST_CUSTOMER_ID)).thenReturn(customerBucks);
 	}
 

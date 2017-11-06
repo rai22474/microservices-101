@@ -15,45 +15,45 @@ import java.util.Map;
 @Configurable(dependencyCheck = true)
 public class BucksRecipient extends Recipient {
 
-	public BucksRecipient(String targetBucksId) {
-		super(new HashMap<>());
+    public BucksRecipient(String targetBucksId) {
+        super(new HashMap<>());
 
-		this.targetBucksId = targetBucksId;
-		getData().put("targetBucksId", targetBucksId);
-	}
+        this.targetBucksId = targetBucksId;
+        getData().put("targetBucksId", targetBucksId);
+    }
 
-	@JsonCreator
-	public BucksRecipient(@JsonProperty("targetBucksId") String targetBucksId,
-						  @JsonProperty("data") Map<String, Object> data) {
-		super(data);
-		this.targetBucksId = targetBucksId;
-	}
+    @JsonCreator
+    public BucksRecipient(String targetBucksId,
+                          Map<String, Object> data) {
+        super(data);
+        this.targetBucksId = targetBucksId;
+    }
 
-	@Override
-	public String requestMoneyOrder(Bucks sourceBucks, Money amount, String operationId) {
-		/*return bankingService.transfer(
+    @Override
+    public String requestMoneyOrder(Bucks sourceBucks, Money amount, String operationId) {
+        /*return bankingService.transfer(
 				sourceBucks.getBankingServiceAgreementId(),
 				getTargetBucks().getBankingServiceAgreementId(),
 				amount,
 				operationId);*/
-		return "";
-	}
+        return "";
+    }
 
-	@Override
-	public void confirmMoneyOrder(Bucks sourceBucks, Map<String, Object> event) {
-		Money amount = (Money) event.get("amount");
+    @Override
+    public void confirmMoneyOrder(Bucks sourceBucks, Map<String, Object> event) {
+        Money amount = (Money) event.get("amount");
 
-		//Bucks targetBucks = getTargetBucks();
+        //Bucks targetBucks = getTargetBucks();
 
-		sourceBucks.withdrawMoney(amount);
-		//targetBucks.receiveMoney(amount);
+        sourceBucks.withdrawMoney(amount);
+        //targetBucks.receiveMoney(amount);
 
-		//bucksRepository.update(sourceBucks.getId(), sourceBucks);
-		//bucksRepository.update(targetBucks.getId(), targetBucks);
-	}
+        //bucksRepository.update(sourceBucks.getId(), sourceBucks);
+        //bucksRepository.update(targetBucks.getId(), targetBucks);
+    }
 
-	@Override
-	public String submitMoneyRequest(String sourceBucksId, Money amount, String reason, String sourceCommand) {
+    @Override
+    public String submitMoneyRequest(String sourceBucksId, Money amount, String reason, String sourceCommand) {
 	/*	MoneyRequestReception moneyRequestReception = new MoneyRequestReception(targetBucksId,
 				sourceBucksId,
 				amount,
@@ -71,42 +71,42 @@ public class BucksRecipient extends Recipient {
 						reason,
 						savedMoneyRequestReception.getId()));*/
 
-		return "";
-	}
+        return "";
+    }
 
-	@Override
-	public Recipient clone() {
-		return new BucksRecipient(targetBucksId, getData());
-	}
+    @Override
+    public Recipient clone() {
+        return new BucksRecipient(targetBucksId, getData());
+    }
 
-	public String getTargetBucksId() {
-		return targetBucksId;
-	}
+    public String getTargetBucksId() {
+        return targetBucksId;
+    }
 
-	@Override
-	public String getType() {
-		return "bucksRecipient";
-	}
+    @Override
+    public String getType() {
+        return "bucksRecipient";
+    }
 
-	@Override
-	public boolean isTheSameAs(String bucksId) {
-		return targetBucksId.equals(bucksId);
-	}
+    @Override
+    public boolean isTheSameAs(String bucksId) {
+        return targetBucksId.equals(bucksId);
+    }
 
-	private String targetBucksId;
+    private String targetBucksId;
 
-	//@Autowired
-	//private FactsFactory factory;
+    //@Autowired
+    //private FactsFactory factory;
 
-	//@Autowired
-	//private EventsPublisher eventsPublisher;
+    //@Autowired
+    //private EventsPublisher eventsPublisher;
 
-	//@Autowired
-	//private EntitiesRepository<MoneyRequestReception> moneyRequestReceptionRepository;
-	
-	@Autowired
-	private TimeServer timeServer;
+    //@Autowired
+    //private EntitiesRepository<MoneyRequestReception> moneyRequestReceptionRepository;
 
-	@Autowired
-	private UIDGenerator uidGenerator;
+    @Autowired
+    private TimeServer timeServer;
+
+    @Autowired
+    private UIDGenerator uidGenerator;
 }

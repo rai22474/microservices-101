@@ -5,7 +5,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
 import io.ari.moneyRequests.domain.repositories.MoneyRequestBundlesRepository;
 import io.ari.moneyRequests.resources.assemblers.MoneyRequestBundleDraftsAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,11 +24,11 @@ public class MoneyRequestBundleDraftResource {
 	@ValidateOnExecution
 	public ResponseEntity modifyMoneyRequestBundleDraft(@RequestHeader("x-customer-id") @NotEmpty String customerId,
 														@PathVariable("draftId") String draftId,
-														@RequestBody Map<String, Object> moneyRequestBundleDraft) throws EntityNotFound {
+														@RequestBody Map<String, Object> moneyRequestBundleDraft)  {
 		return ResponseEntity.ok(modifyExistingDraft(customerId,draftId,moneyRequestBundleDraft));
 	}
 
-	private Map<String, Object> modifyExistingDraft(String customerId, String draftId, Map<String, Object> moneyRequestBundleDraft) throws EntityNotFound {
+	private Map<String, Object> modifyExistingDraft(String customerId, String draftId, Map<String, Object> moneyRequestBundleDraft) {
 		MoneyRequestBundle newRequest = assembler.convertDtoToEntity(customerId, moneyRequestBundleDraft);
 
 		repository.update(draftId, newRequest);

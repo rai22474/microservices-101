@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import io.ari.assemblers.HypermediaAssembler;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class MoneyRequestBundleDraftsAssemblerTest {
 
 	@Test
-	public void shouldCreateAMoneyRequestValidDraftBundle() throws EntityNotFound {
+	public void shouldCreateAMoneyRequestValidDraftBundle() {
 		Map<String, Object> moneyRequestBundleDraftDto = createMoneyRequestBundle(createMoneyRequest());
 		when(moneyRequestBundlesAssembler.convertDtoToEntity(TEST_CUSTOMER_ID, moneyRequestBundleDraftDto)).thenReturn(moneyRequestBundle);
 

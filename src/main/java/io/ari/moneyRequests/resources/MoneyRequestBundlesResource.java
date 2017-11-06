@@ -5,7 +5,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
 import io.ari.moneyRequests.domain.services.MoneyRequestBundleAppService;
 import io.ari.moneyRequests.resources.assemblers.MoneyRequestBundlesAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +23,7 @@ public class MoneyRequestBundlesResource {
     @RequestMapping(method = RequestMethod.POST)
     @ValidateOnExecution
     public ResponseEntity createMoneyRequest(@RequestHeader("x-customer-id") @NotEmpty String customerId,
-                                             @RequestBody Map<String, Object> requestBundleDto) throws EntityNotFound {
+                                             @RequestBody Map<String, Object> requestBundleDto) {
         try {
             MoneyRequestBundle moneyRequestBundle = assembler.convertDtoToEntity(customerId, requestBundleDto);
 

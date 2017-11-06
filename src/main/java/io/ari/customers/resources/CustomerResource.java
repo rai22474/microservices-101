@@ -4,7 +4,6 @@ import io.ari.customers.domain.Customer;
 import io.ari.customers.domain.repositories.CustomersRepository;
 import io.ari.customers.resources.assemblers.CustomersAssembler;
 import io.ari.customers.resources.assemblers.CustomersUpdateAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,14 +30,14 @@ public class CustomerResource {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity deleteMyCustomer(@RequestHeader("x-customer-id") String customerId) throws EntityNotFound {
+    public ResponseEntity deleteMyCustomer(@RequestHeader("x-customer-id") String customerId) {
         customersRepository.delete(customerId);
         return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity updateCustomer(@RequestHeader("x-customer-id") String customerId,
-                                         @RequestBody Map<String, Object> customerData) throws EntityNotFound {
+                                         @RequestBody Map<String, Object> customerData) {
         Customer updatedCustomer = customersAddressAssembler.convertDtoToExistingEntity(customerId, customerData);
         customersRepository.update(customerId, updatedCustomer);
 

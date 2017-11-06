@@ -20,11 +20,10 @@ import java.util.Date;
 @Configurable(dependencyCheck = true)
 public class MoneyOrderBundle implements Entity{
 
-	@JsonCreator
-	public MoneyOrderBundle(@JsonProperty("id") String id,
-							@JsonProperty("creationDate") Date creationDate,
-							@JsonProperty("bucksId") String bucksId,
-							@JsonProperty("moneyOrders") Collection<MoneyOrder> moneyOrders) {
+	public MoneyOrderBundle(String id,
+							Date creationDate,
+							String bucksId,
+							Collection<MoneyOrder> moneyOrders) {
 		this.bucksId = bucksId;
 		this.orders = moneyOrders;
 		this.id = id;
@@ -186,7 +185,5 @@ public class MoneyOrderBundle implements Entity{
 	private Date creationDate;
 
 	private String sourceCommand;
-
-
 }
 

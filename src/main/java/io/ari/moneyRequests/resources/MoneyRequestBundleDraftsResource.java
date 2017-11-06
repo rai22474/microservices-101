@@ -5,7 +5,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
 import io.ari.moneyRequests.domain.repositories.MoneyRequestBundlesRepository;
 import io.ari.moneyRequests.resources.assemblers.MoneyRequestBundleDraftsAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +22,7 @@ public class MoneyRequestBundleDraftsResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity createMoneyRequestBundleDraft(@RequestHeader("x-customer-id") @NotEmpty String customerId,
-														@RequestBody @NotNull Map<String, Object> moneyRequestBundleDraft) throws EntityNotFound {
+														@RequestBody @NotNull Map<String, Object> moneyRequestBundleDraft) {
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(processBundleDraft(customerId,
 					moneyRequestBundleDraft));
@@ -34,7 +33,7 @@ public class MoneyRequestBundleDraftsResource {
 
 	}
 
-	private Map<String, Object> processBundleDraft(String customerId, Map<String, Object> moneyRequestBundleDraftDto) throws EntityNotFound {
+	private Map<String, Object> processBundleDraft(String customerId, Map<String, Object> moneyRequestBundleDraftDto) {
 		MoneyRequestBundle savedDraft = repository.save(assembler.convertDtoToEntity(customerId, moneyRequestBundleDraftDto));
 
 		Collection<Violation> violations = validator.validate(savedDraft);

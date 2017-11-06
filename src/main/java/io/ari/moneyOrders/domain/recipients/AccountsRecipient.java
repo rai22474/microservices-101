@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.ari.bucks.domain.Bucks;
 import io.ari.bucks.domain.repositories.BucksRepository;
 import io.ari.money.domain.Money;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 

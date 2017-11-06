@@ -10,7 +10,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyRequests.domain.MoneyRequest;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import io.ari.time.TimeServer;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class MoneyRequestBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignId() throws EntityNotFound {
+	public void shouldAssignId() {
 		Map<String, Object> moneyRequest = createMoneyRequestDto();
 		Map<String, Object> moneyRequestBundle = createMoneyRequestBundle(moneyRequest);
 		when(moneyRequestsAssembler.convertDtoToEntity(moneyRequest, BUCKS_ID)).thenReturn(request);
@@ -53,7 +52,7 @@ public class MoneyRequestBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignCreationDate() throws EntityNotFound {
+	public void shouldAssignCreationDate() {
 		Map<String, Object> moneyRequest = createMoneyRequestDto();
 		Map<String, Object> moneyRequestBundle = createMoneyRequestBundle(moneyRequest);
 		when(moneyRequestsAssembler.convertDtoToEntity(moneyRequest, BUCKS_ID)).thenReturn(request);
@@ -64,7 +63,7 @@ public class MoneyRequestBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignBucksId() throws EntityNotFound {
+	public void shouldAssignBucksId() {
 		Map<String, Object> moneyRequest = createMoneyRequestDto();
 		Map<String, Object> moneyRequestBundle = createMoneyRequestBundle(moneyRequest);
 		when(moneyRequestsAssembler.convertDtoToEntity(moneyRequest, BUCKS_ID)).thenReturn(request);
@@ -76,7 +75,7 @@ public class MoneyRequestBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignRequests() throws EntityNotFound {
+	public void shouldAssignRequests() {
 		Map<String, Object> moneyRequest = createMoneyRequestDto();
 		Map<String, Object> moneyRequestBundle = createMoneyRequestBundle(moneyRequest);
 		when(moneyRequestsAssembler.convertDtoToEntity(moneyRequest, BUCKS_ID)).thenReturn(request);
@@ -90,7 +89,7 @@ public class MoneyRequestBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignReason() throws EntityNotFound {
+	public void shouldAssignReason() {
 		Map<String, Object> moneyRequest = createMoneyRequestDto();
 		Map<String, Object> moneyRequestBundle = createMoneyRequestBundle(moneyRequest);
 		when(moneyRequestsAssembler.convertDtoToEntity(moneyRequest, BUCKS_ID)).thenReturn(request);
@@ -105,14 +104,14 @@ public class MoneyRequestBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldNotAssignReason() throws EntityNotFound {
+	public void shouldNotAssignReason() {
 		MoneyRequestBundle bundle = assembler.convertDtoToEntity(CUSTOMER_ID, createMoneyRequestWithoutReason());
 
 		assertNull("Returned bundle cannot contain a reason.", bundle.getReason());
 	}
 
 	@Before
-	public void prepareCustomerBucks() throws EntityNotFound {
+	public void prepareCustomerBucks() {
 		when(bucksRepository.findBucksByCustomerId(CUSTOMER_ID)).thenReturn(customerBucks);
 		when(bucksRepository.findById(BUCKS_ID)).thenReturn(customerBucks);
 		when(customerBucks.getId()).thenReturn(BUCKS_ID);

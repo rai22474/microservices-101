@@ -8,7 +8,6 @@ import io.ari.bucks.resources.assemblers.MoneyAssembler;
 import io.ari.bucks.resources.assemblers.ViolationsAssembler;
 import io.ari.moneyOrders.domain.MoneyOrder;
 import io.ari.moneyOrders.domain.MoneyOrderBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import io.ari.time.TimeServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,11 +23,11 @@ import static com.google.common.collect.Maps.newHashMap;
 @Component
 public class MoneyOrderBundlesAssembler {
 
-	public MoneyOrderBundle convertDtoToEntity(String customerId, Map<String, Object> dto) throws EntityNotFound {
+	public MoneyOrderBundle convertDtoToEntity(String customerId, Map<String, Object> dto)  {
 		return createMoneyOrderBundle(customerId, UUID.randomUUID().toString(), dto);
 	}
 
-	public MoneyOrderBundle convertDtoToExistingEntity(String customerId, String id, Map<String, Object> dto) throws EntityNotFound {
+	public MoneyOrderBundle convertDtoToExistingEntity(String customerId, String id, Map<String, Object> dto)  {
 		return createMoneyOrderBundle(customerId, id, dto);
 	}
 
@@ -52,7 +51,7 @@ public class MoneyOrderBundlesAssembler {
 		}
 	}
 
-	private MoneyOrderBundle createMoneyOrderBundle(String customerId, String id, Map<String, Object> dto) throws EntityNotFound {
+	private MoneyOrderBundle createMoneyOrderBundle(String customerId, String id, Map<String, Object> dto) {
 		Collection<Map<String, Object>> singleOrderDtos = (Collection<Map<String, Object>>) dto.get("moneyOrders");
 		Bucks customerBucks = getBucks(customerId);
         MoneyOrder[] moneyOrders = new MoneyOrder[0];
@@ -70,7 +69,7 @@ public class MoneyOrderBundlesAssembler {
 		return bundle;
 	}
 
-	private Bucks getBucks(String customerId) throws EntityNotFound {
+	private Bucks getBucks(String customerId) {
 		return bucksRepository.findBucksByCustomerId(customerId);
 	}
 

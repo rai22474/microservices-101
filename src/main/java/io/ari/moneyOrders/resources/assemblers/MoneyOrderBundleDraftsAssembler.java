@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import io.ari.assemblers.HypermediaAssembler;
 import io.ari.moneyOrders.domain.MoneyOrderBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +14,11 @@ import java.util.Map;
 @Component
 public class MoneyOrderBundleDraftsAssembler {
 
-	public MoneyOrderBundle convertDtoToEntity(String customerId, Map<String, Object> draftData) throws EntityNotFound {
+	public MoneyOrderBundle convertDtoToEntity(String customerId, Map<String, Object> draftData)  {
 		return assignDraftStatus(moneyOrderBundleAssembler.convertDtoToEntity(customerId, draftData));
 	}
 
-	public MoneyOrderBundle convertDtoToExistingEntity(String customerId, String draftId, Map<String, Object> draftData) throws EntityNotFound {
+	public MoneyOrderBundle convertDtoToExistingEntity(String customerId, String draftId, Map<String, Object> draftData) {
 		return assignDraftStatus(moneyOrderBundleAssembler.convertDtoToExistingEntity(customerId, draftId, draftData));
 	}
 

@@ -7,7 +7,6 @@ import io.ari.bussinessRules.BusinessRulesValidator;
 import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyOrders.domain.MoneyOrderBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

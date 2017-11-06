@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import io.ari.bucks.domain.Bucks;
 import io.ari.bucks.domain.repositories.BucksRepository;
 import io.ari.bucks.resources.assemblers.MoneyAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class RechargesResourceTest {
 
     @Test
-    public void shouldReturnTheCreatedResponse() throws EntityNotFound {
+    public void shouldReturnTheCreatedResponse(){
         when(bucksRepository.findBucksByCustomerId(CUSTOMER_ID)).thenReturn(bucks);
         ResponseEntity response = rechargesResource.createRecharge(CUSTOMER_ID,
                 createRechargeData());
@@ -33,7 +32,7 @@ public class RechargesResourceTest {
     }
 
     @Test
-    public void shouldUpdateTheCustomerBucks() throws EntityNotFound {
+    public void shouldUpdateTheCustomerBucks() {
         Map<String,Object> rechargeData = createRechargeData();
         when(moneyAssembler.convertDtoToEntity(rechargeData)).thenReturn(val("10.0").eur().entity());
         when(bucksRepository.findBucksByCustomerId(CUSTOMER_ID)).thenReturn(bucks);

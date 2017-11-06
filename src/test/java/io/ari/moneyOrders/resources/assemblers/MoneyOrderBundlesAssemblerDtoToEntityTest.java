@@ -11,7 +11,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyOrders.domain.MoneyOrder;
 import io.ari.moneyOrders.domain.MoneyOrderBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import io.ari.time.TimeServer;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignNewId() throws EntityNotFound {
+	public void shouldAssignNewId()  {
 		Map<String, Object> moneyOrder = createMoneyOrderDto();
 		Map<String, Object> moneyOrderBundle = createMoneyOrderBundle(moneyOrder);
 		when(moneyOrdersAssembler.convertDtoToEntity(moneyOrderBundle, TEST_BUCK_ID)).thenReturn(order);
@@ -54,7 +53,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignGivenId() throws EntityNotFound {
+	public void shouldAssignGivenId() {
 		Map<String, Object> moneyOrder = createMoneyOrderDto();
 		Map<String, Object> moneyOrderBundle = createMoneyOrderBundle(moneyOrder);
 		when(moneyOrdersAssembler.convertDtoToEntity(moneyOrderBundle, TEST_BUCK_ID)).thenReturn(order);
@@ -68,7 +67,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignBucks() throws EntityNotFound {
+	public void shouldAssignBucks() {
 		Map<String, Object> moneyOrder = createMoneyOrderDto();
 		Map<String, Object> moneyOrderBundle = createMoneyOrderBundle(moneyOrder);
 		when(moneyOrdersAssembler.convertDtoToEntity(moneyOrderBundle, TEST_BUCK_ID)).thenReturn(order);
@@ -80,7 +79,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignMoneyOrders() throws EntityNotFound {
+	public void shouldAssignMoneyOrders() {
 		Map<String, Object> moneyOrder = createMoneyOrderDto();
 		Map<String, Object> moneyOrderBundle = createMoneyOrderBundle(moneyOrder);
 		when(moneyOrdersAssembler.convertDtoToEntity(moneyOrderBundle, TEST_BUCK_ID)).thenReturn(order);
@@ -94,7 +93,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignReason() throws EntityNotFound {
+	public void shouldAssignReason() {
 		Map<String, Object> moneyOrder = createMoneyOrderDto();
 		Map<String, Object> moneyOrderBundle = createMoneyOrderBundle(moneyOrder);
 
@@ -110,7 +109,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldNotAssignReason() throws EntityNotFound {
+	public void shouldNotAssignReason()  {
 		Map<String, Object> moneyOrder = createMoneyOrderDto();
 		when(moneyOrdersAssembler.convertDtoToEntity(moneyOrder, TEST_BUCK_ID)).thenReturn(order);
 		when(order.getAmount()).thenReturn(new Money(new BigDecimal("10"), "EUR"));
@@ -121,7 +120,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Test
-	public void shouldAssignCreationDate() throws EntityNotFound {
+	public void shouldAssignCreationDate() {
 		Map<String, Object> moneyOrder = createMoneyOrderDto();
 		when(moneyOrdersAssembler.convertDtoToEntity(moneyOrder, TEST_BUCK_ID)).thenReturn(order);
 		when(order.getAmount()).thenReturn(new Money(new BigDecimal("10"), "EUR"));
@@ -132,7 +131,7 @@ public class MoneyOrderBundlesAssemblerDtoToEntityTest {
 	}
 
 	@Before
-	public void prepareCustomerBucks() throws EntityNotFound {
+	public void prepareCustomerBucks() {
 		when(bucksRepository.findBucksByCustomerId(TEST_CUSTOMER_ID)).thenReturn(customerBucks);
 
 		when(bucksRepository.findById(TEST_BUCK_ID)).thenReturn(customerBucks);

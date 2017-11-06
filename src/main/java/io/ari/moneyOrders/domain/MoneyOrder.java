@@ -10,7 +10,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyOrders.domain.recipients.Recipient;
 import io.ari.repositories.entities.Entity;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;

@@ -7,7 +7,6 @@ import io.ari.bucks.resources.assemblers.MoneyAssembler;
 import io.ari.bucks.resources.assemblers.ViolationsAssembler;
 import io.ari.moneyRequests.domain.MoneyRequest;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import io.ari.time.TimeServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ import static com.google.common.collect.Maps.newHashMap;
 @Component
 public class MoneyRequestBundlesAssembler {
 
-	public MoneyRequestBundle convertDtoToEntity(String customerId, Map<String, Object> dto) throws EntityNotFound {
+	public MoneyRequestBundle convertDtoToEntity(String customerId, Map<String, Object> dto) {
 		Collection<Map<String, Object>> singleRequestDtos = (Collection<Map<String, Object>>) dto.get("moneyRequests");
 
 		String bucksId = bucksRepository.findBucksByCustomerId(customerId).getId();

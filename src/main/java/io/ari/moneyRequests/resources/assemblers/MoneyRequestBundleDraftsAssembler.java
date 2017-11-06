@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import io.ari.assemblers.HypermediaAssembler;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 @Component
 public class MoneyRequestBundleDraftsAssembler {
 
-	public MoneyRequestBundle convertDtoToEntity(String customerId, Map<String, Object> moneyRequestBundleDto) throws EntityNotFound {
+	public MoneyRequestBundle convertDtoToEntity(String customerId, Map<String, Object> moneyRequestBundleDto){
 		MoneyRequestBundle moneyRequestBundle = moneyRequestBundleAssembler.convertDtoToEntity(customerId, moneyRequestBundleDto);
 		moneyRequestBundle.setStatus("draft");
 

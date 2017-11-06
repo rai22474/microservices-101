@@ -3,7 +3,6 @@ package io.ari.customers.resources;
 import io.ari.customers.domain.Customer;
 import io.ari.customers.domain.repositories.CustomersRepository;
 import io.ari.customers.resources.assemblers.CustomersAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class CustomerResourceTest {
 
 	@Test
-	public void shouldReturnMe() throws EntityNotFound{
+	public void shouldReturnMe() {
 		final Customer clientData = mock(Customer.class);
 		Map<String,Object> clientDto = new HashMap<>();
 		
@@ -40,14 +39,14 @@ public class CustomerResourceTest {
 	}
 	
 
-	/*@Test
-	public void shouldReturnConflictIfUserDontExistsWhenMe() throws EntityNotFound{
-		when(customersRepository.findById(CUSTOMER_ID)).thenThrow(EntityNotFound.class);
+	@Test
+	public void shouldReturnNotFoundIfUserDontExistsWhenMe(){
+		when(customersRepository.findById(CUSTOMER_ID)).thenReturn(null);
 
 		ResponseEntity response =customerResource.me(CUSTOMER_ID);
 		assertEquals("The response code should be NOT FOUND", 404, response.getStatusCodeValue());
 	}
-*/
+
 	private static final String CUSTOMER_ID = "customerId";
 
 	@InjectMocks

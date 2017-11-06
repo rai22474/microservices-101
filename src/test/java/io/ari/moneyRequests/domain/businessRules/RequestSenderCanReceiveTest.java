@@ -7,7 +7,6 @@ import io.ari.bussinessRules.BusinessRulesValidator;
 import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class RequestSenderCanReceiveTest {
 
 	@Test
-	public void shouldReturnBucksCanReceiveViolations() throws EntityNotFound {
+	public void shouldReturnBucksCanReceiveViolations() {
 		when(moneyRequestBundle.getBucksId()).thenReturn(BUCKS_ID);
 		when(moneyRequestBundle.calculateAmount()).thenReturn(amount);
 		when(bucksRepository.findById(BUCKS_ID)).thenReturn(bucks);

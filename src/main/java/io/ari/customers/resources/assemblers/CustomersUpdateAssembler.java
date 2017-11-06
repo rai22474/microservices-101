@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import io.ari.customers.domain.Customer;
 import io.ari.customers.domain.repositories.CustomersRepository;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 @Component
 public class CustomersUpdateAssembler {
 
-	public Customer convertDtoToExistingEntity(String customerId, Map<String, Object> customerData) throws EntityNotFound {
+	public Customer convertDtoToExistingEntity(String customerId, Map<String, Object> customerData) {
 		Customer existingCustomer = customersRepository.findById(customerId);
 
         if (customerData.containsKey("name")){

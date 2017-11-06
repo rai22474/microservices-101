@@ -5,7 +5,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.cards.domain.Card;
 import io.ari.cards.domain.repositories.CardsRepository;
 import io.ari.cards.resources.assemblers.CardsAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

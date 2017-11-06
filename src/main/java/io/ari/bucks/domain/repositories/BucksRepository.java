@@ -3,7 +3,6 @@ package io.ari.bucks.domain.repositories;
 import com.google.common.collect.ImmutableMap;
 import io.ari.bucks.domain.Bucks;
 import io.ari.repositories.entities.EntitiesRepository;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -12,12 +11,11 @@ import java.util.Map;
 @Repository
 public class BucksRepository extends EntitiesRepository<Bucks> {
 
-
-	public Bucks findByCustomerId(String customerId) throws EntityNotFound {
+	public Bucks findByCustomerId(String customerId) {
 		return super.findById(customerBucks.get(customerId));
 	}
 
-	public Bucks findBucksByCustomerId(String customerId) throws EntityNotFound {
+	public Bucks findBucksByCustomerId(String customerId){
 		return super.findById(customerBucks.get(customerId));
 	}
 
@@ -27,34 +25,12 @@ public class BucksRepository extends EntitiesRepository<Bucks> {
 	}
 
 	public void deleteCustomer(String customerId) {
-
 		/*	Bucks bucks = findByCustomerId(customerId);
 		bankingService.deleteAgreement(bucks.getBankingServiceAgreementId());
 		getWriteRepository().delete(bucksByCustomerFilter(customerId));
 		return bucks;*/
 	}
 
-	public Bucks findByBankingServiceId(String bankingServiceId) throws EntityNotFound {
-		/*Map<String, Object> query = bucksByBankingServiceIdQuery(bankingServiceId);
-		Map<String, Object> foundBucksData = getReadRepository().findByKey(query).orElseThrow(EntityNotFound::new);
-		return convertDtoToEntity(foundBucksData);*/
-		return null;
-	}
-
-	private Map<String, Object> bucksByCustomerQuery(String customerId) {
-		return ImmutableMap.of("participants.id", customerId, "type", "bucks");
-	}
-
-	/*
-	private EntityFilter bucksByCustomerFilter(String customerId) {
-		EntityFilter entityFilter = new EntityFilter();
-		
-		entityFilter.addPredicate(new EqualsPredicate("participants.id", customerId));
-		entityFilter.addPredicate(new EqualsPredicate("type", "bucks"));
-		
-		return entityFilter;
-	}
-*/
 	private Map<String, Object> bucksByBankingServiceIdQuery(String bankingServiceId) {
 		return ImmutableMap.of("bankingServiceAgreementId", bankingServiceId, "type", "bucks");
 	}
@@ -65,6 +41,4 @@ public class BucksRepository extends EntitiesRepository<Bucks> {
 
 	private Map<String,String> customerBucks = new HashMap<>();
 
-//	@Autowired
-//	private BankingService bankingService;
 }

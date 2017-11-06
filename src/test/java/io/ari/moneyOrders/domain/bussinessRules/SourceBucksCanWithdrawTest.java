@@ -8,7 +8,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.money.domain.Money;
 import io.ari.moneyOrders.domain.MoneyOrderBundle;
 import io.ari.moneyOrders.domain.businessRules.SourceBucksCanWithdraw;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +37,7 @@ public class SourceBucksCanWithdrawTest {
 	}
 
 	@Before
-	public void setup() throws EntityNotFound {
+	public void setup()  {
 		when(moneyOrderBundle.calculateAmount()).thenReturn(money);
 
 		when(moneyOrderBundle.getBucksId()).thenReturn(BUCKS_ID);

@@ -5,7 +5,6 @@ import io.ari.bussinessRules.Violation;
 import io.ari.moneyOrders.domain.MoneyOrderBundle;
 import io.ari.moneyOrders.domain.repositories.MoneyOrderBundlesRepository;
 import io.ari.moneyOrders.resources.assemblers.MoneyOrderBundleDraftsAssembler;
-import io.ari.repositories.exceptions.EntityNotFound;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +23,7 @@ public class MoneyOrderBundleDraftsResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity createMoneyOrderBundleDraft(@RequestHeader("x-customer-id") @NotEmpty String customerId,
-													  @RequestBody @NotNull Map<String, Object> moneyOrderBundleDraftDto) throws EntityNotFound {
+													  @RequestBody @NotNull Map<String, Object> moneyOrderBundleDraftDto){
 		try {
 			MoneyOrderBundle moneyOrderBundleDraft = processDraftCommand(customerId, moneyOrderBundleDraftDto);
 			Map<String, Object> publishedDraftDto = assembler.convertEntityToDto(moneyOrderBundleDraft);
@@ -38,7 +37,7 @@ public class MoneyOrderBundleDraftsResource {
 		}
 	}
 
-	private MoneyOrderBundle processDraftCommand(String customerId, Map<String, Object> moneyOrderBundleDraftDto) throws EntityNotFound {
+	private MoneyOrderBundle processDraftCommand(String customerId, Map<String, Object> moneyOrderBundleDraftDto) {
 		MoneyOrderBundle moneyOrderBundle = repository.save(assembler.convertDtoToEntity(customerId, moneyOrderBundleDraftDto));
 
 		Collection<Violation> violations = validator.validate(moneyOrderBundle);
