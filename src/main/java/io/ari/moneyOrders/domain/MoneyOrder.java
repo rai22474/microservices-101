@@ -17,114 +17,107 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Map;
 
-public class MoneyOrder implements Entity{
+public class MoneyOrder implements Entity {
 
-	@JsonCreator
-	public MoneyOrder(@JsonProperty("id") String id,
-					  @JsonProperty("amount") Money amount,
-					  @JsonProperty("bucksId") String bucksId,
-					  @JsonProperty("recipient") Recipient recipient,
-					  @JsonProperty("status") String status) {
-		this.id = id;
-		this.amount = amount;
-		this.bucksId = bucksId;
-		this.recipient = recipient;
-		this.status = status;
-	}
+    @JsonCreator
+    public MoneyOrder(@JsonProperty("id") String id,
+                      @JsonProperty("amount") Money amount,
+                      @JsonProperty("bucksId") String bucksId,
+                      @JsonProperty("recipient") Recipient recipient,
+                      @JsonProperty("status") String status) {
+        this.id = id;
+        this.amount = amount;
+        this.bucksId = bucksId;
+        this.recipient = recipient;
+        this.status = status;
+    }
 
-	public MoneyOrder(String id) {
-		this.id = id;
-	}
+    public MoneyOrder(String id) {
+        this.id = id;
+    }
 
-	public void changeStatus(String newStatus) {
-		setStatus(newStatus);
-	}
+    public void changeStatus(String newStatus) {
+        setStatus(newStatus);
+    }
 
-	public Money getAmount() {
-		return amount;
-	}
+    public Money getAmount() {
+        return amount;
+    }
 
-	public void setAmount(Money amount) {
-		this.amount = amount;
-	}
+    public void setAmount(Money amount) {
+        this.amount = amount;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public Recipient getRecipient() {
-		return recipient;
-	}
+    public Recipient getRecipient() {
+        return recipient;
+    }
 
-	public void setRecipient(Recipient recipient) {
-		this.recipient = recipient;
-	}
+    public void setRecipient(Recipient recipient) {
+        this.recipient = recipient;
+    }
 
-	public String submit() {
-		return recipient.requestMoneyOrder(getBucks(), amount, id);
-	}
+    public String submit() {
+        return recipient.requestMoneyOrder(getBucks(), amount, id);
+    }
 
-	public void processTransferEvent(Map<String, Object> event) {
-		recipient.confirmMoneyOrder(getBucks(), event);
-	}
+    public void processTransferEvent(Map<String, Object> event) {
+        recipient.confirmMoneyOrder(getBucks(), event);
+    }
 
+    public boolean hasViolations() {
+        return !violations.isEmpty();
+    }
 
+    public Collection<Violation> getViolations() {
+        return violations;
+    }
 
-	public boolean hasViolations() {
-		return !violations.isEmpty();
-	}
+    void setBucksRepository(BucksRepository bucksRepository) {
+        this.bucksRepository = bucksRepository;
+    }
 
-	public Collection<Violation> getViolations() {
-		return violations;
-	}
+    public String getBucksId() {
+        return bucksId;
+    }
 
-	void setBucksRepository(BucksRepository bucksRepository) {
-		this.bucksRepository = bucksRepository;
-	}
+    public void setBucksId(String bucksId) {
+        this.bucksId = bucksId;
+    }
 
-	public String getBucksId() {
-		return bucksId;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setBucksId(String bucksId) {
-		this.bucksId = bucksId;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    private Bucks getBucks() {
+        if (bucks == null) {
+            bucks = bucksRepository.findById(bucksId);
+        }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+        return bucks;
+    }
 
-	private Bucks getBucks() {
-		if (bucks == null) {
-			try {
-				bucks = bucksRepository.findById(bucksId);
-			} catch (EntityNotFound e) {
-				throw new IllegalStateException("The money order bucks don't exist.", e);
-			}
-		}
+    private Collection<Violation> violations = ImmutableSet.of();
 
-		return bucks;
-	}
+    private final String id;
 
-	private Collection<Violation> violations = ImmutableSet.of();
+    private Money amount = new Money(BigDecimal.ZERO, "EUR");
 
+    private Recipient recipient;
 
-	private final String id;
+    private String bucksId;
 
-	private Money amount = new Money(BigDecimal.ZERO, "EUR");
+    @Autowired
+    private BucksRepository bucksRepository;
 
-	private Recipient recipient;
+    private Bucks bucks;
 
-	private String bucksId;
-
-	@Autowired
-	private BucksRepository bucksRepository;
-
-	private Bucks bucks;
-
-	private String status = "new";
+    private String status = "new";
 }

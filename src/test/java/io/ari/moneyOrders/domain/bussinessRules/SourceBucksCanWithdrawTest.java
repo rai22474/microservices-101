@@ -37,13 +37,6 @@ public class SourceBucksCanWithdrawTest {
 		assertFalse(rule.isSatisfied(moneyOrderBundle).isEmpty());
 	}
 
-	@Test(expected = IllegalStateException.class)
-	public void shouldThrowIllegalStateExceptionWhenInvalidBucks() throws EntityNotFound {
-		when(bucksRepository.findById(BUCKS_ID)).thenThrow(EntityNotFound.class);
-
-		rule.isSatisfied(moneyOrderBundle);
-	}
-
 	@Before
 	public void setup() throws EntityNotFound {
 		when(moneyOrderBundle.calculateAmount()).thenReturn(money);

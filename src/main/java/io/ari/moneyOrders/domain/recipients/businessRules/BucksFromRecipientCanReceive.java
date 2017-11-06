@@ -19,30 +19,26 @@ import java.util.Collection;
 @Component
 public class BucksFromRecipientCanReceive implements BusinessRule<Recipient> {
 
-	@Override
-	public Collection<Violation> isSatisfied(Recipient recipient, Object... additionalData) {
-		if (recipient instanceof BucksRecipient) {
-			Money amount = (Money) additionalData[0];
+    @Override
+    public Collection<Violation> isSatisfied(Recipient recipient, Object... additionalData) {
+        if (recipient instanceof BucksRecipient) {
+            Money amount = (Money) additionalData[0];
 
-			return bucksReceptionValidator.validate(getTargetBucks(((BucksRecipient)recipient).getTargetBucksId()), amount);
-		}
+            return bucksReceptionValidator.validate(getTargetBucks(((BucksRecipient) recipient).getTargetBucksId()), amount);
+        }
 
-		return new ArrayList<>();
-	}
+        return new ArrayList<>();
+    }
 
-	private Bucks getTargetBucks(String targetBucksId) {
-		try {
-			return bucksRepository.findById(targetBucksId);
-		} catch (EntityNotFound e) {
-			throw new IllegalStateException(e);
-		}
-	}
+    private Bucks getTargetBucks(String targetBucksId) {
+        return bucksRepository.findById(targetBucksId);
+    }
 
-	@Autowired
-	@Qualifier("bucksReceptionValidator")
-	private BusinessRulesValidator<Bucks> bucksReceptionValidator;
+    @Autowired
+    @Qualifier("bucksReceptionValidator")
+    private BusinessRulesValidator<Bucks> bucksReceptionValidator;
 
-	@Autowired
-	private BucksRepository bucksRepository;
+    @Autowired
+    private BucksRepository bucksRepository;
 
 }

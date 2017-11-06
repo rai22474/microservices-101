@@ -24,37 +24,33 @@ public class CardResource {
     @ValidateOnExecution
     public ResponseEntity blockCard(@RequestHeader("x-customer-id") @NotEmpty String customerId,
                                     @PathVariable("id") String cardId) {
-        try {
-            Card card = cardsRepository.findById(cardId);
+        Card card = cardsRepository.findById(cardId);
 
-            if (!card.getCustomerId().equals(customerId)){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-
-            Collection<Violation> canBeBlockedViolations = canBeBlocked(card);
-            if (!canBeBlockedViolations.isEmpty()) {
-                return resumeWithBlockViolations(canBeBlockedViolations);
-            }
-
-            card.block();
-            Card blockedCard = cardsRepository.update(cardId, card);
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(cardsAssembler.convertEntityToDto(blockedCard));
-        } catch (EntityNotFound entityNotFound) {
+        if (card == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
+        if (!card.getCustomerId().equals(customerId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        Collection<Violation> canBeBlockedViolations = canBeBlocked(card);
+        if (!canBeBlockedViolations.isEmpty()) {
+            return resumeWithBlockViolations(canBeBlockedViolations);
+        }
+
+        card.block();
+        Card blockedCard = cardsRepository.update(cardId, card);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(cardsAssembler.convertEntityToDto(blockedCard));
     }
 
     @RequestMapping(method = RequestMethod.GET)
     @ValidateOnExecution
     public ResponseEntity getCard(@RequestHeader("x-customer-id") @NotEmpty String customerId,
                                   @PathVariable("id") String cardId) {
-        try {
-            Card card = cardsRepository.findById(cardId);
-            return ResponseEntity.ok(cardsAssembler.convertEntityToDto(card));
-        } catch (EntityNotFound e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        Card card = cardsRepository.findById(cardId);
+        return ResponseEntity.ok(cardsAssembler.convertEntityToDto(card));
     }
 
 

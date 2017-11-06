@@ -17,28 +17,24 @@ import java.util.Collection;
 @Component
 public class SourceBucksCanWithdraw implements BusinessRule<MoneyOrderBundle> {
 
-	@Override
-	public java.util.Collection<Violation> isSatisfied(MoneyOrderBundle moneyOrderBundle, Object... additionalData) {
-		Money amount = moneyOrderBundle.calculateAmount();
-		return canWithdraw(getBucks(moneyOrderBundle),amount);
-	}
+    @Override
+    public java.util.Collection<Violation> isSatisfied(MoneyOrderBundle moneyOrderBundle, Object... additionalData) {
+        Money amount = moneyOrderBundle.calculateAmount();
+        return canWithdraw(getBucks(moneyOrderBundle), amount);
+    }
 
-	private Bucks getBucks(MoneyOrderBundle moneyOrderBundle) {
-		try {
-			return bucksRepository.findById(moneyOrderBundle.getBucksId());
-		} catch (EntityNotFound entityNotFound) {
-			throw new IllegalStateException("Cannot locate money order bundle source bucks.");
-		}
-	}
+    private Bucks getBucks(MoneyOrderBundle moneyOrderBundle) {
+        return bucksRepository.findById(moneyOrderBundle.getBucksId());
+    }
 
-	public Collection<Violation> canWithdraw(Bucks bucks,Money amount) {
-		return bucksWithdrawalValidator.validate(bucks, amount);
-	}
+    public Collection<Violation> canWithdraw(Bucks bucks, Money amount) {
+        return bucksWithdrawalValidator.validate(bucks, amount);
+    }
 
-	@Autowired
-	private BucksRepository bucksRepository;
+    @Autowired
+    private BucksRepository bucksRepository;
 
-	@Autowired
-	@Qualifier("bucksWithdrawalValidator")
-	private BusinessRulesValidator<Bucks> bucksWithdrawalValidator;
+    @Autowired
+    @Qualifier("bucksWithdrawalValidator")
+    private BusinessRulesValidator<Bucks> bucksWithdrawalValidator;
 }

@@ -2,10 +2,8 @@ package io.ari.bucks.domain.repositories;
 
 import com.google.common.collect.ImmutableMap;
 import io.ari.bucks.domain.Bucks;
-import io.ari.bucks.domain.repositories.assemblers.BucksStorageAssembler;
 import io.ari.repositories.entities.EntitiesRepository;
 import io.ari.repositories.exceptions.EntityNotFound;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -14,13 +12,9 @@ import java.util.Map;
 @Repository
 public class BucksRepository extends EntitiesRepository<Bucks> {
 
-	@Autowired
-	public BucksRepository(BucksStorageAssembler storageAssembler) {
-		super(storageAssembler);
-	}
 
-	public Map<String,Object> findByCustomerId(String customerId) throws EntityNotFound {
-		return super.findOne(customerBucks.get(customerId));
+	public Bucks findByCustomerId(String customerId) throws EntityNotFound {
+		return super.findById(customerBucks.get(customerId));
 	}
 
 	public Bucks findBucksByCustomerId(String customerId) throws EntityNotFound {

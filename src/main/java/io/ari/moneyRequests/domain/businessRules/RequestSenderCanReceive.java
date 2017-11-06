@@ -16,23 +16,19 @@ import java.util.Collection;
 @Component
 public class RequestSenderCanReceive implements BusinessRule<MoneyRequestBundle> {
 
-	@Override
-	public Collection<Violation> isSatisfied(MoneyRequestBundle moneyRequestBundle, Object... additionalData) {
-		return bucksReceptionValidator.validate(getBucks(moneyRequestBundle),moneyRequestBundle.calculateAmount());
-	}
+    @Override
+    public Collection<Violation> isSatisfied(MoneyRequestBundle moneyRequestBundle, Object... additionalData) {
+        return bucksReceptionValidator.validate(getBucks(moneyRequestBundle), moneyRequestBundle.calculateAmount());
+    }
 
-	private Bucks getBucks(MoneyRequestBundle moneyRequestBundle) {
-		try {
-			return bucksRepository.findById(moneyRequestBundle.getBucksId());
-		} catch (EntityNotFound e) {
-			throw new IllegalStateException();
-		}
-	}
+    private Bucks getBucks(MoneyRequestBundle moneyRequestBundle) {
+        return bucksRepository.findById(moneyRequestBundle.getBucksId());
+    }
 
-	@Autowired
-	private BucksRepository bucksRepository;
+    @Autowired
+    private BucksRepository bucksRepository;
 
-	@Autowired
-	@Qualifier("bucksReceptionValidator")
-	private BusinessRulesValidator<Bucks> bucksReceptionValidator;
+    @Autowired
+    @Qualifier("bucksReceptionValidator")
+    private BusinessRulesValidator<Bucks> bucksReceptionValidator;
 }

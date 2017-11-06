@@ -1,6 +1,5 @@
 package io.ari.moneyOrders.domain.recipients;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.ari.bucks.domain.Bucks;
 import io.ari.bucks.domain.repositories.BucksRepository;
@@ -13,16 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configurable(dependencyCheck = true)
-public class AccountsRecipient extends Recipient{
+public class AccountsRecipient extends Recipient {
 
-
-    public AccountsRecipient(String targetAccountNumber){
+    public AccountsRecipient(String targetAccountNumber) {
         super(new HashMap<>());
         this.targetAccountNumber = targetAccountNumber;
         getData().put("accountNumber", targetAccountNumber);
     }
 
-    @JsonCreator
     public AccountsRecipient(@JsonProperty("accountNumber") String targetAccountNumber,
                              @JsonProperty("data") Map<String, Object> data) {
         super(data);
@@ -55,21 +52,21 @@ public class AccountsRecipient extends Recipient{
     }
 
     @Override
-    public String getType() { return "accountsRecipient"; }
-
-    @Override
-    public boolean isTheSameAs(String bucksId) {
-        try{
-           return bucksRepository.findById(bucksId).getBankingServiceAgreementId().equals(targetAccountNumber);
-        } catch (EntityNotFound e) {
-            throw new IllegalStateException(e);
-        }
+    public String getType() {
+        return "accountsRecipient";
     }
 
     @Override
-    public Recipient clone()  { return new AccountsRecipient(targetAccountNumber, getData()); }
+    public boolean isTheSameAs(String bucksId) {
+        return bucksRepository.findById(bucksId).getBankingServiceAgreementId().equals(targetAccountNumber);
+    }
 
-    public String getTargetAccountNumber(){
+    @Override
+    public Recipient clone() {
+        return new AccountsRecipient(targetAccountNumber, getData());
+    }
+
+    public String getTargetAccountNumber() {
         return targetAccountNumber;
     }
 

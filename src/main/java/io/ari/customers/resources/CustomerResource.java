@@ -18,39 +18,40 @@ import java.util.Map;
 @RequestMapping("me")
 public class CustomerResource {
 
-	@ValidateOnExecution
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity me(@RequestHeader("x-customer-id") @NotEmpty String customerId) {
-		try {
-			Map<String, Object> customer = customersRepository.findOne(customerId);
-			return ResponseEntity.ok(customersAssembler.convertEntityToDto(customer));
-		} catch (EntityNotFound e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-	}
+    @ValidateOnExecution
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity me(@RequestHeader("x-customer-id") @NotEmpty String customerId) {
+        Customer customer = customersRepository.findById(customerId);
 
-	@RequestMapping(method = RequestMethod.DELETE)
-	public ResponseEntity deleteMyCustomer(@RequestHeader("x-customer-id") String customerId) throws EntityNotFound {
-		customersRepository.delete(customerId);
-		return ResponseEntity.noContent().build();
-	}
+        if (customer == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
 
-	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity updateCustomer(@RequestHeader("x-customer-id") String customerId,
-							   @RequestBody Map<String, Object> customerData) throws EntityNotFound {
-		Customer updatedCustomer = customersAddressAssembler.convertDtoToExistingEntity(customerId, customerData);
-		customersRepository.update(customerId, updatedCustomer);
+        return ResponseEntity.ok(customersAssembler.convertEntityToDto(customer));
+    }
 
-		return ResponseEntity.noContent().build();
-	}
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity deleteMyCustomer(@RequestHeader("x-customer-id") String customerId) throws EntityNotFound {
+        customersRepository.delete(customerId);
+        return ResponseEntity.noContent().build();
+    }
 
-	@Autowired
-	private CustomersUpdateAssembler customersAddressAssembler;
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity updateCustomer(@RequestHeader("x-customer-id") String customerId,
+                                         @RequestBody Map<String, Object> customerData) throws EntityNotFound {
+        Customer updatedCustomer = customersAddressAssembler.convertDtoToExistingEntity(customerId, customerData);
+        customersRepository.update(customerId, updatedCustomer);
 
-	@Autowired
-	private CustomersRepository customersRepository;
+        return ResponseEntity.noContent().build();
+    }
 
-	@Autowired
-	private CustomersAssembler customersAssembler;
+    @Autowired
+    private CustomersUpdateAssembler customersAddressAssembler;
+
+    @Autowired
+    private CustomersRepository customersRepository;
+
+    @Autowired
+    private CustomersAssembler customersAssembler;
 
 }

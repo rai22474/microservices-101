@@ -2,16 +2,10 @@ package io.ari.moneyRequests.domain.events;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import io.ari.money.domain.Money;
 import io.ari.moneyRequests.domain.MoneyRequestBundle;
-import io.ari.moneyRequests.domain.events.assemblers.MoneyRequestEventsStorageAssembler;
-import io.ari.repositories.assemblers.StorageAssembler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class MoneyRequestBundleCreationEventFactory {
@@ -24,13 +18,13 @@ public class MoneyRequestBundleCreationEventFactory {
 		movementData.put("agree", bucksId);
 		movementData.put("_relatedAgreements", ImmutableList.of(bucksId));
 		movementData.put("movementType", MOVEMENT_TYPE);
-		movementData.put("amount", moneyStorageAssembler.convertEntityToDto(moneyRequestBundle.calculateAmount()));
+		//movementData.put("amount", moneyStorageAssembler.convertEntityToDto(moneyRequestBundle.calculateAmount()));
 		assignReason(moneyRequestBundle, movementData);
-		movementData.put("moneyRequests", moneyRequestBundle.getRequests()
+		/*movementData.put("moneyRequests", moneyRequestBundle.getRequests()
 				.stream()
 				.map(moneyRequestsStorageAssembler::convertDomainEntityToDto)
 				.collect(Collectors.toList()));
-
+*/
 		return movementData;
 	}
 
@@ -39,13 +33,6 @@ public class MoneyRequestBundleCreationEventFactory {
 			movementData.put("reason", moneyOrderBundle.getReason());
 		}
 	}
-
-	@Autowired
-	@Qualifier("moneyStorageAssembler")
-	private StorageAssembler<Money> moneyStorageAssembler;
-
-	@Autowired
-	private MoneyRequestEventsStorageAssembler moneyRequestsStorageAssembler;
 
 	private static final String MOVEMENT_TYPE = "moneyRequestBundle";
 

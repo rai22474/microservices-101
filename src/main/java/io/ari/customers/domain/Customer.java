@@ -1,22 +1,15 @@
 package io.ari.customers.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.ImmutableMap;
 import io.ari.repositories.entities.Entity;
 
 import java.util.Map;
 
-import static com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion.NON_NULL;
 
-
-@JsonSerialize(include = NON_NULL)
 public class Customer implements Entity {
 
-	@JsonCreator
-	public Customer(@JsonProperty("id") String id,
-					@JsonProperty("idCard") String idCard) {
+	public Customer(String id,
+					String idCard) {
 		this.id = id;
 		this.idCard = idCard;
 	}
@@ -101,7 +94,5 @@ public class Customer implements Entity {
 
 	private String avatar;
 
-	@JsonProperty("settings")
 	private Map<String, Object> settings;
-
 }

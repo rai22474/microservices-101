@@ -17,5 +17,4 @@ public class AccountsRecipientsAssembler {
 
         return recipient;
     }
-
 }

@@ -1,6 +1,6 @@
 package io.ari.customers.resources;
 
-import com.google.common.collect.ImmutableMap;
+import io.ari.customers.domain.Customer;
 import io.ari.customers.domain.exceptions.CustomerExists;
 import io.ari.customers.domain.repositories.CustomersRepository;
 import io.ari.customers.resources.assemblers.CustomersAssembler;
@@ -26,25 +26,24 @@ public class CustomersResourceTest {
 
 	@Test
 	public void shouldReturnTheCreatedResponse() throws CustomerExists {
-		ResponseEntity response = customersResource.createCustomer(CUSTOMER_ID,
-				createCustomerData());
+		ResponseEntity response = customersResource.createCustomer(CUSTOMER_ID, new HashMap<>());
 
 		assertEquals("The response code should be CREATED", 201, response.getStatusCodeValue());
-		verify(customersRepository).saveEntity(CUSTOMER_ID, createCustomerData());
+		verify(customersRepository).save(createCustomerData());
 	}
 	
 	@Test
 	public void shouldReturnTheEntityResponse() throws CustomerExists {
-		Map<String, Object> customerData = createCustomerData();
-		when(customersRepository.saveEntity(CUSTOMER_ID,customerData)).thenReturn(ImmutableMap.of("id",CUSTOMER_ID));
+		Customer customerData = createCustomerData();
+		when(customersRepository.save(customerData)).thenReturn(customerData);
 
-		ResponseEntity response = customersResource.createCustomer(CUSTOMER_ID,customerData);
+		ResponseEntity response = customersResource.createCustomer(CUSTOMER_ID,new HashMap<>());
 
 		Map<String,Object> entity = (Map<String,Object>)response.getBody();
 
 		assertNotNull("The response entity must not null",entity);
 		assertEquals("The id must be expected", CUSTOMER_ID, entity.get("entityId"));
-		verify(customersRepository).saveEntity(CUSTOMER_ID,customerData);
+		verify(customersRepository).save(customerData);
 	}
 	
 	@Test
@@ -54,8 +53,8 @@ public class CustomersResourceTest {
 		verify(customersRepository).deleteAll();
 	}
 	
-	private Map<String, Object> createCustomerData() {
-		Map<String, Object> customer = new HashMap<>();
+	private Customer createCustomerData() {
+		/*Map<String, Object> customer = new HashMap<>();
 
 		customer.put("Nationality", "IT");
 		customer.put("Gender", "V");
@@ -69,8 +68,8 @@ public class CustomersResourceTest {
 		customer.put("totalCode", "ES0182000003082");
 		customer.put("CivilStatus", "");
 		customer.put("LegalForm", "");
-
-		return customer;
+*/
+		return new Customer("","");
 	}
 
 	@Mock

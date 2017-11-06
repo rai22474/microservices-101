@@ -7,6 +7,7 @@ import io.ari.money.domain.Money;
 import io.ari.moneyOrders.domain.MoneyOrder;
 import io.ari.moneyOrders.domain.MoneyOrderBundle;
 import io.ari.moneyOrders.domain.recipients.BucksRecipient;
+import io.ari.repositories.entities.Entity;
 import io.ari.uidGenerator.UIDGenerator;
 import org.springframework.beans.factory.annotation.Configurable;
 
@@ -17,7 +18,7 @@ import static com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion.
 
 @JsonSerialize(include = NON_NULL)
 @Configurable(dependencyCheck = true)
-public class MoneyRequestReception {
+public class MoneyRequestReception implements Entity {
 
 	@JsonCreator
 	public MoneyRequestReception(@JsonProperty("id") String id,

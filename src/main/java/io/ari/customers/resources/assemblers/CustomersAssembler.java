@@ -1,6 +1,6 @@
 package io.ari.customers.resources.assemblers;
 
-import io.ari.assemblers.Assembler;
+import com.google.common.collect.ImmutableList;
 import io.ari.assemblers.HypermediaAssembler;
 import io.ari.customers.domain.Customer;
 import io.ari.customers.domain.exceptions.CustomerExists;
@@ -9,13 +9,14 @@ import io.ari.customers.resources.assemblers.exceptions.InvalidIdCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static java.util.stream.Collectors.toMap;
+import static com.google.common.collect.Maps.newHashMap;
 
 @Component
-public class CustomersAssembler extends Assembler {
+public class CustomersAssembler{
 
     public Customer convertDtoToEntity(String customerId, Map<String, Object> customerData) throws CustomerExists, InvalidIdCard {
         String idCard = (String) customerData.get("idCard");
@@ -39,19 +40,40 @@ public class CustomersAssembler extends Assembler {
         return of("_links", hypermediaAssembler.createHypermedia("api/me", "ari-read"));
     }
 
-    @Override
-    public Map<String, Object> convertEntityToDto(Map<String, Object> customerData, Object... additionalData) {
-        Map<String, Object> customerDto = customerData
-                .entrySet()
-                .stream()
-                .collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+    public Map<String, Object> convertEntityToDto(Customer customer) {
+        Map<String, Object> customerDto = new HashMap<>();
+        customerDto.put("name",customer.getName());
+        customerDto.put("settings",customer.getSettings());
+        customerDto.put("lastName", customer.getLastName());
+        customerDto.put("idCard", customer.getIdCard());
+        customerDto.put("email", customer.getEmail());
+        customerDto.put("address", customer.getAddress());
 
+        customerDto.put("contactDetails", ImmutableList.of(createEmailContact(customer.getEmail()),
+                createPhoneContact(customer.getMobilePhone())));
         customerDto.put("_links", getCustomerHypermedia());
 
         return customerDto;
     }
 
-    @Override
+    private Map<String, Object> createEmailContact(String email) {
+        Map<String, Object> emailContact = newHashMap();
+
+        emailContact.put("contact", email);
+        emailContact.put("contactType", "personal_email");
+
+        return emailContact;
+    }
+
+    private Map<String, Object> createPhoneContact(String phone) {
+        Map<String, Object> phoneContact = newHashMap();
+
+        phoneContact.put("contact", phone);
+        phoneContact.put("contactType", "personal_phone");
+
+        return phoneContact;
+    }
+
     protected String getCollectionSelfLink() {
         return "api/customers";
     }
