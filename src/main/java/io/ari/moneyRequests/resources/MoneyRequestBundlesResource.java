@@ -24,21 +24,16 @@ public class MoneyRequestBundlesResource {
     @ValidateOnExecution
     public ResponseEntity createMoneyRequest(@RequestHeader("x-customer-id") @NotEmpty String customerId,
                                              @RequestBody Map<String, Object> requestBundleDto) {
-        try {
-            MoneyRequestBundle moneyRequestBundle = assembler.convertDtoToEntity(customerId, requestBundleDto);
+        MoneyRequestBundle moneyRequestBundle = assembler.convertDtoToEntity(customerId, requestBundleDto);
 
-            Collection<Violation> violations = validator.validate(moneyRequestBundle);
-            moneyRequestBundle.setViolations(violations);
+        Collection<Violation> violations = validator.validate(moneyRequestBundle);
+        moneyRequestBundle.setViolations(violations);
 
-            if (!violations.isEmpty()) {
-                return resumeConflictedRequest(moneyRequestBundle);
-            }
-
-            return returnProcessedRequest(moneyRequestBundleAppService.process(customerId, moneyRequestBundle));
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
+        if (!violations.isEmpty()) {
+            return resumeConflictedRequest(moneyRequestBundle);
         }
+
+        return returnProcessedRequest(moneyRequestBundleAppService.process(customerId, moneyRequestBundle));
     }
 
     private ResponseEntity returnProcessedRequest(MoneyRequestBundle moneyRequestBundle) {
