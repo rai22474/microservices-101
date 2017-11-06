@@ -25,8 +25,6 @@ public class WalletResource {
         return ResponseEntity.ok(cardsAssembler.convertEntitiesToDtos(cards));
     }
 
-
-
     @Autowired
     private CardsRepository cardsRepository;
 
