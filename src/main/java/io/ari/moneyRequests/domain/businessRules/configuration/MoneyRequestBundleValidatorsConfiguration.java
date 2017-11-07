@@ -12,16 +12,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MoneyRequestValidatorsConfiguration {
+public class MoneyRequestBundleValidatorsConfiguration {
 
-
-	@Bean(name = "moneyRequestValidator")
-	public BusinessRulesValidator<MoneyRequest> moneyRequestValidator() {
+	@Bean(name = "moneyRequestBundleValidator")
+	public BusinessRulesValidator<MoneyRequestBundle> moneyRequestBundleBusinessRulesValidator() {
 		return new BusinessRulesValidator<>(ImmutableSet.of(
-				requestRecipientIsNotTheSender));
+				requestSenderCanReceive,
+				childrenMoneyRequestsAreValid));
 	}
 
 	@Autowired
-	private RequestRecipientIsNotTheSender requestRecipientIsNotTheSender;
+	private RequestSenderCanReceive requestSenderCanReceive;
+
+	@Autowired
+	private ChildrenMoneyRequestsAreValid childrenMoneyRequestsAreValid;
 
 }

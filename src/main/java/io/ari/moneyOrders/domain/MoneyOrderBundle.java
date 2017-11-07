@@ -1,7 +1,5 @@
 package io.ari.moneyOrders.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import io.ari.bussinessRules.Violation;
@@ -15,131 +13,125 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
+import java.util.function.Consumer;
 
 
 @Configurable(dependencyCheck = true)
-public class MoneyOrderBundle implements Entity{
+public class MoneyOrderBundle implements Entity {
 
-	public MoneyOrderBundle(String id,
-							Date creationDate,
-							String bucksId,
-							Collection<MoneyOrder> moneyOrders) {
-		this.bucksId = bucksId;
-		this.orders = moneyOrders;
-		this.id = id;
-		this.creationDate = creationDate;
-	}
+    public MoneyOrderBundle(String id,
+                            Date creationDate,
+                            String bucksId,
+                            Collection<MoneyOrder> moneyOrders) {
+        this.bucksId = bucksId;
+        this.orders = moneyOrders;
+        this.id = id;
+        this.creationDate = creationDate;
+    }
 
-	public MoneyOrderBundle(String id,
-							Date creationDate,
-							String bucksId,
-							MoneyOrder... moneyOrders) {
-		this.bucksId = bucksId;
+    public MoneyOrderBundle(String id,
+                            Date creationDate,
+                            String bucksId,
+                            MoneyOrder... moneyOrders) {
+        this.bucksId = bucksId;
         this.orders = Arrays.asList(moneyOrders);
         this.id = id;
-		this.creationDate = creationDate;
-	}
+        this.creationDate = creationDate;
+    }
 
-	public Money calculateAmount() {
-		return orders.stream()
-				.map(MoneyOrder::getAmount)
-				.reduce(new Money(BigDecimal.ZERO, "EUR"), (first, second) -> first.add(second));
-	}
+    public Money calculateAmount() {
+        return orders.stream()
+                .map(MoneyOrder::getAmount)
+                .reduce(new Money(BigDecimal.ZERO, "EUR"), (first, second) -> first.add(second));
+    }
 
-	/*
-	public void submit() {
-		orders.stream().forEach(
-				order -> {
-					Future<String> submissionFuture = future(order::submit, actorSystem.dispatcher());
-					submissionFuture.onSuccess(successCallback(moneyOrderSubmitted(order.getId(), id, moneyOrderBundlesRepository)),
-							actorSystem.dispatcher());
-				});
-	}
 
-	public void processTransferEvent(String moneyOrderId, Map<String, Object> event) {
-		MoneyOrder moneyOrder = findMoneyOrderById(moneyOrderId);
-		moneyOrder.processTransferEvent(event);
-		eventsPublisher.publish(movementsFactory.createFact(moneyOrder.getAmount(),
-				bucksId,
-				(String) moneyOrder.getRecipient().getData().get("targetBucksId"),
-				"moneyOrder",
-				reason,
-				id));
-	}
-	
+    public void submit() {
+        orders.stream().forEach(
+                order -> {
+                    order.submit();
+                    moneyOrderSubmitted(order.getId(), id, moneyOrderBundlesRepository);
+                });
+    }
 
-	private Consumer<String> moneyOrderSubmitted(String moneyOrderId, String moneyOrderBundleId, MoneyOrderBundlesRepository moneyOrderBundlesRepository) {
-		return transactionId -> {
-			future(() -> MoneyOrderBundle.changeStatusToSubmitted(moneyOrderId, moneyOrderBundleId, moneyOrderBundlesRepository), actorSystem.dispatcher());
-		};
-	}
+    public void processTransferEvent(String moneyOrderId, Map<String, Object> event) {
+        MoneyOrder moneyOrder = findMoneyOrderById(moneyOrderId);
+        moneyOrder.processTransferEvent(event);
+        /*eventsPublisher.publish(movementsFactory.createFact(moneyOrder.getAmount(),
+                bucksId,
+                (String) moneyOrder.getRecipient().getData().get("targetBucksId"),
+                "moneyOrder",
+                reason,
+                id));*/
+    }
 
-	private static MoneyOrderBundle changeStatusToSubmitted(String moneyOrderId, String moneyOrderBundleId, MoneyOrderBundlesRepository moneyOrderBundlesRepository) {
-		MoneyOrderBundle moneyOrderBundle = findMoneyOrderBundle(moneyOrderBundleId, moneyOrderBundlesRepository);
-		moneyOrderBundle.findMoneyOrderById(moneyOrderId).changeStatus("submitted");
-		return moneyOrderBundlesRepository.update(moneyOrderBundleId, moneyOrderBundle);
-	}
 
-	private static MoneyOrderBundle findMoneyOrderBundle(String id, MoneyOrderBundlesRepository repository) {
-		try {
-			return repository.findById(id);
-		} catch (EntityNotFound entityNotFound) {
-			throw new IllegalArgumentException();
-		}
-	}
+    private Consumer<String> moneyOrderSubmitted(String moneyOrderId, String moneyOrderBundleId, MoneyOrderBundlesRepository moneyOrderBundlesRepository) {
+        return transactionId -> MoneyOrderBundle.changeStatusToSubmitted(moneyOrderId, moneyOrderBundleId, moneyOrderBundlesRepository);
+    }
 
-	private MoneyOrder findMoneyOrderById(String moneyOrderId) {
-		return orders.stream().
-				filter(moneyOrder -> moneyOrder.getId().equals(moneyOrderId)).findFirst().get();
-	}
-*/
+    private static MoneyOrderBundle changeStatusToSubmitted(String moneyOrderId, String moneyOrderBundleId, MoneyOrderBundlesRepository moneyOrderBundlesRepository) {
+        MoneyOrderBundle moneyOrderBundle = findMoneyOrderBundle(moneyOrderBundleId, moneyOrderBundlesRepository);
+        moneyOrderBundle.findMoneyOrderById(moneyOrderId).changeStatus("submitted");
+        return moneyOrderBundlesRepository.update(moneyOrderBundleId, moneyOrderBundle);
+    }
 
-	public Collection<MoneyOrder> getOrders() {
-		return ImmutableList.copyOf(orders);
-	}
+    private static MoneyOrderBundle findMoneyOrderBundle(String id, MoneyOrderBundlesRepository repository) {
+        return repository.findById(id);
+    }
 
-	public Collection<Violation> getViolations() {
-		return violations;
-	}
+    private MoneyOrder findMoneyOrderById(String moneyOrderId) {
+        return orders.stream().
+                filter(moneyOrder -> moneyOrder.getId().equals(moneyOrderId)).findFirst().get();
+    }
 
-	public boolean hasViolations() {
-		return !violations.isEmpty();
-	}
+    public Collection<MoneyOrder> getOrders() {
+        return ImmutableList.copyOf(orders);
+    }
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    public Collection<Violation> getViolations() {
+        return violations;
+    }
 
-	public String getReason() {
-		return reason;
-	}
+    public boolean hasViolations() {
+        return !violations.isEmpty();
+    }
 
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getReason() {
+        return reason;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getBucksId() {
-		return bucksId;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	void setMoneyOrderBundlesRepository(MoneyOrderBundlesRepository moneyOrderBundlesRepository) {
-		this.moneyOrderBundlesRepository = moneyOrderBundlesRepository;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getBucksId() {
+        return bucksId;
+    }
+
+    void setMoneyOrderBundlesRepository(MoneyOrderBundlesRepository moneyOrderBundlesRepository) {
+        this.moneyOrderBundlesRepository = moneyOrderBundlesRepository;
+    }
 
 	/*
-	void setEventsPublisher(EventsPublisher eventsRepository) {
+    void setEventsPublisher(EventsPublisher eventsRepository) {
 		this.eventsPublisher = eventsRepository;
 	}
 
@@ -148,42 +140,42 @@ public class MoneyOrderBundle implements Entity{
 	}
 */
 
-	public void setViolations(Collection<Violation> violations) {
-		this.violations = violations;
-	}
+    public void setViolations(Collection<Violation> violations) {
+        this.violations = violations;
+    }
 
-	public String getSourceCommand() {
-		return sourceCommand;
-	}
+    public String getSourceCommand() {
+        return sourceCommand;
+    }
 
-	public void setSourceCommand(String sourceCommand) {
-		this.sourceCommand = sourceCommand;
-	}
+    public void setSourceCommand(String sourceCommand) {
+        this.sourceCommand = sourceCommand;
+    }
 
-	@Autowired
-	private MoneyOrderBundlesRepository moneyOrderBundlesRepository;
+    @Autowired
+    private MoneyOrderBundlesRepository moneyOrderBundlesRepository;
 
-	//@Autowired
-	//private EventsPublisher eventsPublisher;
+    //@Autowired
+    //private EventsPublisher eventsPublisher;
 
-	//@Autowired
-	//private FactsFactory movementsFactory;
+    //@Autowired
+    //private FactsFactory movementsFactory;
 
 
-	private Collection<MoneyOrder> orders;
+    private Collection<MoneyOrder> orders;
 
-	private Collection<Violation> violations = ImmutableSet.of();
+    private Collection<Violation> violations = ImmutableSet.of();
 
-	private String reason;
+    private String reason;
 
-	private String bucksId;
+    private String bucksId;
 
-	private String id;
+    private String id;
 
-	private String status = "ready";
+    private String status = "ready";
 
-	private Date creationDate;
+    private Date creationDate;
 
-	private String sourceCommand;
+    private String sourceCommand;
 }
 

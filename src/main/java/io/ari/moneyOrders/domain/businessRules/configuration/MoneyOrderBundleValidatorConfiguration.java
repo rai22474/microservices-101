@@ -13,21 +13,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MoneyOrderValidatorsConfiguration {
+public class MoneyOrderBundleValidatorConfiguration {
 
-
-	@Bean(name = "moneyOrderValidator")
-	public BusinessRulesValidator<MoneyOrder> moneyOrderValidator() {
+	@Bean(name = "moneyOrderBundleValidator")
+	public BusinessRulesValidator<MoneyOrderBundle> moneyOrderBundleValidator() {
 		return new BusinessRulesValidator<>(ImmutableSet.of(
-				recipientCanReceive,
-				orderRecipientIsNotTheSender));
+				sourceBucksCanWithdraw,
+				childrenMoneyOrdersAreValid));
 	}
 
+	@Autowired
+	private SourceBucksCanWithdraw sourceBucksCanWithdraw;
 
 	@Autowired
-	private RecipientCanReceive recipientCanReceive;
-
-	@Autowired
-	private OrderRecipientIsNotTheSender orderRecipientIsNotTheSender;
+	private ChildrenMoneyOrdersAreValid childrenMoneyOrdersAreValid;
 
 }
