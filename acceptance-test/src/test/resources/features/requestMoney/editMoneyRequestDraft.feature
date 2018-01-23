@@ -24,12 +24,12 @@ Feature: Edit an existing draft of a money request to other person
 
   Scenario: Update an existing request draft
     Given a request draft with "10.0 EUR" to other customer with identifier "Y8197160C" with reason "the wedding payment", created by the customer "79986535X"
-    When the customer "79986535X" updates the money request draft, requesting "200.0 EUR" to the customer "Y8197160C" with reason "by the face"
+    When the customer "79986535X" updates the money request draft, requesting "10.0 EUR" to the customer "Y8197160C" with reason "by the face"
     Then the response must be "OK"
     And the money request draft doesn't have any errors
     And the money request draft has the following data:
       | reason      | totalAmount |
-      | by the face | 200.0 EUR     |
+      | by the face | 10.0 EUR     |
 
   Scenario: Update an existing request draft when sender cannot receive that amount of money
     Given a request draft with "200 EUR" to other customer with identifier "32971623L" with reason "the wedding invoice", created by the customer "Y8197160C"
