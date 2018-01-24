@@ -88,8 +88,6 @@ public class MoneyRequestBundleDraftsAssemblerTest {
 	@Mock
 	private MoneyRequestBundlesAssembler moneyRequestBundlesAssembler;
 
-	@Mock
-	private MoneyRequestsAssembler moneyRequestsAssembler;
 
 	@Mock
 	private MoneyRequestBundle moneyRequestBundle;

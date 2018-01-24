@@ -19,7 +19,10 @@ import java.util.stream.Collectors;
 @Configurable(dependencyCheck = true)
 public class MoneyRequestBundle implements Entity {
 
-    public MoneyRequestBundle(String id, Date creationDate, String bucksId, MoneyRequest... moneyRequests) {
+    public MoneyRequestBundle(String id,
+                              Date creationDate,
+                              String bucksId,
+                              MoneyRequest... moneyRequests) {
         this.bucksId = bucksId;
         this.requests = Arrays.asList(moneyRequests);
         this.id = id;
@@ -27,7 +30,7 @@ public class MoneyRequestBundle implements Entity {
     }
 
     public Money calculateAmount() {
-        return new Money(new BigDecimal("10.0"), "EUR");
+        return new Money(new BigDecimal("10.00"), "EUR");
     }
 
     public MoneyRequestBundle clone() {
@@ -84,7 +87,6 @@ public class MoneyRequestBundle implements Entity {
         return ImmutableList.copyOf(requests);
     }
 
-
     public String getReason() {
         return reason;
     }
@@ -109,17 +111,12 @@ public class MoneyRequestBundle implements Entity {
         this.status = status;
     }
 
-
     public Date getCreationDate() {
         return creationDate;
     }
 
     public void setViolations(Collection<Violation> violations) {
         this.violations = violations;
-    }
-
-    public void setMoneyRequestBundlesRepository(MoneyRequestBundlesRepository moneyRequestBundlesRepository) {
-        this.moneyRequestBundlesRepository = moneyRequestBundlesRepository;
     }
 
     public String getBucksId() {
@@ -142,10 +139,6 @@ public class MoneyRequestBundle implements Entity {
         this.sourceCommand = sourceCommand;
     }
 
-    void setTimeServer(TimeServer timeServer) {
-        this.timeServer = timeServer;
-    }
-
     private Collection<MoneyRequest> requests;
 
     private Collection<Violation> violations = ImmutableSet.of();
@@ -164,13 +157,10 @@ public class MoneyRequestBundle implements Entity {
 
     private String sourceCommand;
 
-
     @Autowired
     private MoneyRequestBundlesRepository moneyRequestBundlesRepository;
 
 
     @Autowired
     private TimeServer timeServer;
-
-
 }

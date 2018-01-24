@@ -35,8 +35,5 @@ public class MoneyRequestBundleDraftsAssembler {
 	private MoneyRequestBundlesAssembler moneyRequestBundleAssembler;
 
 	@Autowired
-	private MoneyRequestsAssembler moneyRequestsAssembler;
-
-	@Autowired
 	private HypermediaAssembler hypermediaAssembler;
 }
