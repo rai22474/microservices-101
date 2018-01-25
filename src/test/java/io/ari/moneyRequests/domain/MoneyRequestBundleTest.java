@@ -17,12 +17,11 @@ import static org.mockito.Mockito.when;
 public class MoneyRequestBundleTest {
 
     @Test
-    public void shouldReturnNotNullWhenCalculateAmountWithNoRequest(){
-        MoneyRequestBundle moneyRequestBundle = new MoneyRequestBundle(ID, CREATION_DATE, TEST_BUCKS_ID, new MoneyRequest[]{});
+    public void should_Return_Not_Null_When_Calculate_Total_Amount() {
+        MoneyRequestBundle moneyRequestBundle = new MoneyRequestBundle(ID,CREATION_DATE,TEST_BUCKS_ID);
+        Money totalAmount = moneyRequestBundle.calculateAmount();
 
-        Money calculatedAmount = moneyRequestBundle.calculateAmount();
-
-        assertNotNull("The calculated amount must be not null", calculatedAmount);
+        assertNotNull("The total amount must be not null", totalAmount);
     }
 
     @Test
@@ -43,4 +42,5 @@ public class MoneyRequestBundleTest {
 
     @Mock(name = "firstMoneyRequest")
     private MoneyRequest firstMoneyRequest;
+
 }

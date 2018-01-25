@@ -29,9 +29,6 @@ public class MoneyRequestBundle implements Entity {
         this.creationDate = creationDate;
     }
 
-    public Money calculateAmount() {
-        return new Money(new BigDecimal("10.00"), "EUR");
-    }
 
     public MoneyRequestBundle clone() {
         List<MoneyRequest> clonedRequests = requests.stream()
@@ -130,6 +127,13 @@ public class MoneyRequestBundle implements Entity {
     public Collection<Violation> getViolations() {
         return violations;
     }
+
+    public Money calculateAmount() {
+        return requests.stream()
+                .map(MoneyRequest::getAmount)
+                .reduce(new Money(BigDecimal.ZERO, "EUR"), Money::add);
+    }
+
 
     public String getSourceCommand() {
         return sourceCommand;
